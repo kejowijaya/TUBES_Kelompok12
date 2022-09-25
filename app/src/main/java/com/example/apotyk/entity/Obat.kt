@@ -1,6 +1,6 @@
-package com.example.login.entity
+package com.example.apotyk.entity
 
-import com.example.login.R
+import com.example.apotyk.R
 
 
 class Obat(var ID:String, var nama:String, var harga:Double, var jenis:String, var gambar:Int) {

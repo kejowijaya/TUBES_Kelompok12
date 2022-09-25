@@ -1,11 +1,11 @@
-package com.example.login
+package com.example.apotyk
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.login.user.User
-import com.example.login.user.UserDB
+import com.example.apotyk.user.User
+import com.example.apotyk.user.UserDB
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,29 +34,10 @@ class Register : AppCompatActivity() {
 
         btnRegister.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
-            val mBundle = Bundle()
-            mBundle.putString("username",username.text.toString())
-            mBundle.putString("password",password.text.toString())
-            mBundle.putString("tanggalLahir",tanggalLahir.text.toString())
-            mBundle.putString("email",email.text.toString())
-            mBundle.putString("nomorTelepon",nomorTelepon.text.toString())
-            intent.putExtra("register", mBundle)
-
-            if(username.text.toString().length == 0){
-                CoroutineScope(Dispatchers.IO).launch {
-                    db.userDao().addUser(
-                        User(1, "a",
-                            "a")
-                    )
-                    finish()
-                }
-
-                startActivity(intent)
-            }
 
             CoroutineScope(Dispatchers.IO).launch {
                 db.userDao().addUser(
-                    User((Math.random() * (10000 - 100 + 1)).toInt(), username.text.toString(),
+                    User((Math.random() * (10000 - 100 + 1)).toInt(), username.text.toString(), tanggalLahir.text.toString(), email.text.toString(), nomorTelepon.text.toString(),
                         password.text.toString())
                 )
                 finish()

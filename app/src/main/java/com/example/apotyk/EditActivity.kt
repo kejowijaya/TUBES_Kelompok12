@@ -1,12 +1,12 @@
-package com.example.login
+package com.example.apotyk
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.login.user.Constant
-import com.example.login.user.User
-import com.example.login.user.UserDB
+import com.example.apotyk.user.Constant
+import com.example.apotyk.user.User
+import com.example.apotyk.user.UserDB
 import kotlinx.android.synthetic.main.activity_edit.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,7 +46,7 @@ class EditActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 db.userDao().addUser(
                     User(0,edit_title.text.toString(),
-                        edit_note.text.toString())
+                        "", "", "", edit_note.text.toString())
                 )
                 finish()
             }
@@ -55,7 +55,7 @@ class EditActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 db.userDao().updateUser(
                     User(noteId, edit_title.text.toString(),
-                        edit_note.text.toString())
+                        "", "", "", edit_note.text.toString())
                 )
                 finish()
             }

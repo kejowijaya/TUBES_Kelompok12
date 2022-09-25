@@ -1,4 +1,4 @@
-package com.example.login.user
+package com.example.apotyk.user
 
 import android.content.Context
 import androidx.room.Database

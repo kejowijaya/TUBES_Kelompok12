@@ -9,7 +9,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.login"
+        applicationId 'com.example.apotyk'
         minSdk 26
         targetSdk 32
         versionCode 1

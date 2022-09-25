@@ -1,4 +1,4 @@
-package com.example.login
+package com.example.apotyk
 
 import android.app.AlertDialog
 import android.content.DialogInterface
@@ -8,9 +8,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.login.user.Constant
-import com.example.login.user.User
-import com.example.login.user.UserDB
+import com.example.apotyk.user.Constant
+import com.example.apotyk.user.User
+import com.example.apotyk.user.UserDB
 import kotlinx.android.synthetic.main.activity_show_user.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

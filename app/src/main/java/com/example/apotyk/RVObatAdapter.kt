@@ -1,4 +1,4 @@
-package com.example.login
+package com.example.apotyk
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.TextView
-import com.example.login.entity.Obat
+import com.example.apotyk.entity.Obat
 
 class RVObatAdapter(private val data: Array<Obat>) : RecyclerView.Adapter<RVObatAdapter.viewHolder>() {
 

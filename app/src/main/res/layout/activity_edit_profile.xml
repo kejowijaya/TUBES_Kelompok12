@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShowProfile">
+    tools:context=".Register">
     <ImageView
-        android:id="@+id/gambarProfil"
+        android:id="@+id/gambarProfilEdit"
         android:src="@drawable/profil"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -19,9 +19,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-    />
+        />
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilSessionNama"
+        android:id="@+id/tilEditNama"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -30,19 +30,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gambarProfil"
+        app:layout_constraintTop_toBottomOf="@+id/gambarProfilEdit"
         app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:id="@+id/etSessionUsernameLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="Username"
-            android:hint="Username" />
-
-        <TextView
-            android:id="@+id/etSessionUsername"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEditUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -50,7 +42,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilSessionEmail"
+        android:id="@+id/tilEditPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -59,17 +51,32 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilSessionNama"
+        app:layout_constraintTop_toBottomOf="@+id/tilEditNama"
         app:layout_constraintVertical_bias="0.0">
-        <TextView
-            android:id="@+id/etSessionEmailLabel"
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEditPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
-            android:text="Email"
-            android:layout_margin="16dp"/>
-        <TextView
-            android:id="@+id/etSessionEmail"
+            android:hint="Password"
+            android:layout_margin="16dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEditEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilEditPassword"
+        app:layout_constraintVertical_bias="0.0">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEditEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
@@ -77,7 +84,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilSessionTanggalLahir"
+        android:id="@+id/tilEditTanggalLahir"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -86,24 +93,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilSessionEmail"
+        app:layout_constraintTop_toBottomOf="@+id/tilEditEmail"
         app:layout_constraintVertical_bias="0.0">
-        <TextView
-            android:id="@+id/etSessionTanggalLahirLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tanggal Lahir"
-            android:text="Tanggal Lahir"
-            android:layout_margin="16dp"/>
-        <TextView
-            android:id="@+id/etSessionTanggalLahir"
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEditTanggalLahir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Tanggal Lahir"
             android:layout_margin="16dp"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilSessionNomorTelepon"
+        android:id="@+id/tilEditNomorTelepon"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -112,33 +113,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilSessionTanggalLahir"
+        app:layout_constraintTop_toBottomOf="@+id/tilEditTanggalLahir"
         app:layout_constraintVertical_bias="0.0">
-        <TextView
-            android:id="@+id/etSessionNomorTeleponLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nomor Telepon"
-            android:text="Nomor Telepon"
-            android:layout_margin="16dp"/>
-        <TextView
-            android:id="@+id/etSessionNomorTelepon"
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEditNomorTelepon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nomor Telepon"
             android:layout_margin="16dp"/>
     </com.google.android.material.textfield.TextInputLayout>
     <Button
-        android:id="@+id/btnEditUser"
+        android:id="@+id/btnUpdateUser"
         android:layout_width="376dp"
         android:layout_height="52dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Edit User"
+        android:text="Update User"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilSessionNomorTelepon"
+        app:layout_constraintTop_toBottomOf="@+id/tilEditNomorTelepon"
         app:layout_constraintVertical_bias="0.573" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

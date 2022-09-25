@@ -1,13 +1,12 @@
-package com.example.login
+package com.example.apotyk
 
 import android.annotation.SuppressLint
-import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.login.R
-import com.example.login.user.User
+import com.example.apotyk.R
+import com.example.apotyk.user.User
 import kotlinx.android.synthetic.main.activity_show_user_adapter.view.*
 
 class ShowUserAdapter (private val notes: ArrayList<User>, private val

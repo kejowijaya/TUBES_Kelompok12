@@ -1,4 +1,4 @@
-package com.example.login
+package com.example.apotyk
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.login.entity.Obat
+import com.example.apotyk.entity.Obat
 
 class FragmentObat : Fragment() {
     override fun onCreateView(

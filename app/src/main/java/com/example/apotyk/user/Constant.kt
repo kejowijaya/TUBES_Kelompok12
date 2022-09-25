@@ -1,4 +1,4 @@
-package com.example.login.user
+package com.example.apotyk.user
 
 class Constant {
     companion object{

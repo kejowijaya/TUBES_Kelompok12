@@ -1,16 +1,10 @@
-package com.example.login
+package com.example.apotyk
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.lang.Exception
 
 class HomeActivity : AppCompatActivity() {
     lateinit var mBundle: Bundle
@@ -20,7 +14,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         loadFragment(FragmentObat())
-        mBundle = intent.getBundleExtra("login")!!
+        mBundle = intent.getBundleExtra("user")!!
         bottomNav = findViewById(R.id.bottomNav) as BottomNavigationView
         bottomNav.setOnNavigationItemReselectedListener {
             when (it.itemId) {
@@ -34,7 +28,7 @@ class HomeActivity : AppCompatActivity() {
                 }
                 R.id.menu_user -> {
                     val moveProfile = Intent(this,ShowProfile::class.java)
-                    moveProfile.putExtra("login", mBundle)
+                    moveProfile.putExtra("user", mBundle)
                     startActivity(moveProfile)
                     return@setOnNavigationItemReselectedListener
                 }

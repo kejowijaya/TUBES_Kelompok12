@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Kuliah/PemrogramanBerbasisPlatform/Modul5/UGD/app/src/main/res/layout/activity_edit.xml" value="0.2" />
+        <entry key="..\:/Kuliah/PemrogramanBerbasisPlatform/Modul5/UGD/app/src/main/res/layout/activity_edit_profile.xml" value="0.10989583333333333" />
+        <entry key="..\:/Kuliah/PemrogramanBerbasisPlatform/Modul5/UGD/app/src/main/res/layout/activity_home.xml" value="0.2" />
+        <entry key="..\:/Kuliah/PemrogramanBerbasisPlatform/Modul5/UGD/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Kuliah/PemrogramanBerbasisPlatform/Modul5/UGD/app/src/main/res/layout/activity_register.xml" value="0.10989583333333333" />
+        <entry key="..\:/Kuliah/PemrogramanBerbasisPlatform/Modul5/UGD/app/src/main/res/layout/activity_show_profile.xml" value="0.152" />
+        <entry key="..\:/Kuliah/PemrogramanBerbasisPlatform/Modul5/UGD/app/src/main/res/layout/rv_item_obat.xml" value="0.1" />
         <entry key="..\:/UGD3_12-master/app/src/main/res/drawable/ic_person.xml" value="0.1" />
         <entry key="..\:/UGD3_12-master/app/src/main/res/layout/activity_edit.xml" value="0.20416666666666666" />
         <entry key="..\:/UGD3_12-master/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />

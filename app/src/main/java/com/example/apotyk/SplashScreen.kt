@@ -1,4 +1,4 @@
-package com.example.login
+package com.example.apotyk
 
 import android.content.Context
 import android.content.Intent
@@ -18,13 +18,13 @@ class SplashScreen : AppCompatActivity() {
         sharedPreferences = getSharedPreferences(myPreference,
             Context.MODE_PRIVATE)
         if(sharedPreferences!!.contains(name)){
-            val intent = Intent(this, Register::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }else{
             setContentView(R.layout.splash_screen)
             Handler().postDelayed({
-                val intent = Intent(this, Register::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }, 3000)
