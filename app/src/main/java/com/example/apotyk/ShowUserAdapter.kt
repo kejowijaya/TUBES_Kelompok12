@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.apotyk.R
-import com.example.apotyk.user.User
+import com.example.apotyk.obat.Obat
 import kotlinx.android.synthetic.main.activity_show_user_adapter.view.*
 
-class ShowUserAdapter (private val notes: ArrayList<User>, private val
+class ShowUserAdapter (private val notes: ArrayList<Obat>, private val
 listener: OnAdapterListener) :
     RecyclerView.Adapter<ShowUserAdapter.NoteViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
@@ -22,7 +21,7 @@ listener: OnAdapterListener) :
     override fun onBindViewHolder(holder: NoteViewHolder, position:
     Int) {
         val note = notes[position]
-        holder.view.text_title.text = note.username
+        holder.view.text_title.text = note.namaObat
         holder.view.text_title.setOnClickListener{
             listener.onClick(note)
         }
@@ -37,14 +36,14 @@ listener: OnAdapterListener) :
     inner class NoteViewHolder( val view: View) :
         RecyclerView.ViewHolder(view)
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(list: List<User>){
+    fun setData(list: List<Obat>){
         notes.clear()
         notes.addAll(list)
         notifyDataSetChanged()
     }
     interface OnAdapterListener {
-        fun onClick(note: User)
-        fun onUpdate(note: User)
-        fun onDelete(note: User)
+        fun onClick(note: Obat)
+        fun onUpdate(note: Obat)
+        fun onDelete(note: Obat)
     }
 }
