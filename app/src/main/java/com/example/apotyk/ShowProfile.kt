@@ -1,16 +1,25 @@
 package com.example.apotyk
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 
 class ShowProfile : AppCompatActivity() {
     lateinit var mBundle: Bundle
+    lateinit var editUser: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_profile)
         mBundle = intent.getBundleExtra("login")!!
         setData()
+        editUser = findViewById(R.id.btnEditUser)
+        editUser.setOnClickListener {
+            val intent = Intent(this, EditProfile::class.java)
+            intent.putExtra("user", mBundle)
+            startActivity(intent)
+        }
     }
 
     fun setData() {
