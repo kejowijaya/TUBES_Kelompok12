@@ -34,11 +34,29 @@ class Register : AppCompatActivity() {
 
         btnRegister.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
+            val mBundle = Bundle()
+            mBundle.putString("username",username.text.toString())
+            mBundle.putString("password",password.text.toString())
+            mBundle.putString("tanggalLahir",tanggalLahir.text.toString())
+            mBundle.putString("email",email.text.toString())
+            mBundle.putString("nomorTelepon",nomorTelepon.text.toString())
+            intent.putExtra("register", mBundle)
+
+            if(username.text.toString().length == 0){
+                CoroutineScope(Dispatchers.IO).launch {
+                    db.userDao().addUser(
+                        User(1, "a",
+                            "a", "a", "a", "a")
+                    )
+                    finish()
+                }
+
+            }
 
             CoroutineScope(Dispatchers.IO).launch {
                 db.userDao().addUser(
-                    User((Math.random() * (10000 - 100 + 1)).toInt(), username.text.toString(), tanggalLahir.text.toString(), email.text.toString(), nomorTelepon.text.toString(),
-                        password.text.toString())
+                    User((Math.random() * (10000 - 100 + 1)).toInt(), username.text.toString(),
+                        password.text.toString(), email.text.toString(), nomorTelepon.text.toString(), password.text.toString())
                 )
                 finish()
             }

@@ -5,15 +5,15 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.apotyk.user.Constant
-import com.example.apotyk.user.User
-import com.example.apotyk.user.UserDB
+import com.example.apotyk.obat.Obat
+import com.example.apotyk.obat.ObatDB
 import kotlinx.android.synthetic.main.activity_edit.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class EditActivity : AppCompatActivity() {
-    val db by lazy { UserDB(this) }
+    val db by lazy { ObatDB(this) }
     private var noteId: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,18 +44,18 @@ class EditActivity : AppCompatActivity() {
     private fun setupListener() {
         button_save.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                db.userDao().addUser(
-                    User(0,edit_title.text.toString(),
-                        "", "", "", edit_note.text.toString())
+                db.obatDao().addObat(
+                    Obat(0,edit_title.text.toString(),
+                        edit_note.text.toString())
                 )
                 finish()
             }
         }
         button_update.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                db.userDao().updateUser(
-                    User(noteId, edit_title.text.toString(),
-                        "", "", "", edit_note.text.toString())
+                db.obatDao().updateObat(
+                    Obat(noteId, edit_title.text.toString(),
+                        edit_note.text.toString())
                 )
                 finish()
             }
@@ -64,9 +64,9 @@ class EditActivity : AppCompatActivity() {
     fun getNote() {
         noteId = intent.getIntExtra("intent_id", 0)
         CoroutineScope(Dispatchers.IO).launch {
-            val notes = db.userDao().getUser(noteId)[0]
-            edit_title.setText(notes.username)
-            edit_note.setText(notes.password)
+            val notes = db.obatDao().getObat(noteId)[0]
+            edit_title.setText(notes.namaObat)
+            edit_note.setText(notes.jumlahObat)
         }
     }
     override fun onSupportNavigateUp(): Boolean {

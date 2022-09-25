@@ -1,4 +1,4 @@
-package com.example.apotyk.user
+package com.example.apotyk.obat
 
 import android.content.Context
 import androidx.room.Database
@@ -6,14 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [User::class],
+    entities = [Obat::class],
     version = 1
 )
-abstract class UserDB: RoomDatabase() {
-    abstract fun userDao() : UserDao
+abstract class ObatDB: RoomDatabase() {
+    abstract fun obatDao() : ObatDao
 
     companion object {
-        @Volatile private var instance : UserDB? = null
+        @Volatile private var instance : ObatDB? = null
         private val LOCK = Any()
         operator fun invoke(context: Context) = instance ?:
         synchronized(LOCK){
@@ -24,8 +24,8 @@ abstract class UserDB: RoomDatabase() {
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(
                 context.applicationContext,
-                UserDB::class.java,
-                "user.db"
+                ObatDB::class.java,
+                "obat.db"
             ).build()
     }
 }

@@ -9,8 +9,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.apotyk.user.Constant
-import com.example.apotyk.user.User
-import com.example.apotyk.user.UserDB
+import com.example.apotyk.obat.Obat
+import com.example.apotyk.obat.ObatDB
 import kotlinx.android.synthetic.main.activity_show_user.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ShowUser : AppCompatActivity() {
-    val db by lazy { UserDB(this) }
+    val db by lazy { ObatDB(this) }
     lateinit var noteAdapter: ShowUserAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,14 +30,14 @@ class ShowUser : AppCompatActivity() {
     private fun setupRecyclerView() {
         noteAdapter = ShowUserAdapter(arrayListOf(), object :
             ShowUserAdapter.OnAdapterListener{
-            override fun onClick(note: User) {
-                Toast.makeText(applicationContext, note.username, Toast.LENGTH_SHORT).show()
-                intentEdit(note.id,Constant.TYPE_READ)
+            override fun onClick(note: Obat) {
+                Toast.makeText(applicationContext, note.namaObat, Toast.LENGTH_SHORT).show()
+                intentEdit(note.idObat,Constant.TYPE_READ)
             }
-            override fun onUpdate(note: User) {
-                intentEdit(note.id, Constant.TYPE_UPDATE)
+            override fun onUpdate(note: Obat) {
+                intentEdit(note.idObat, Constant.TYPE_UPDATE)
             }
-            override fun onDelete(note: User) {
+            override fun onDelete(note: Obat) {
                 deleteDialog(note)
             }
         })
@@ -46,11 +46,11 @@ class ShowUser : AppCompatActivity() {
             adapter = noteAdapter
         }
     }
-    private fun deleteDialog(note: User){
+    private fun deleteDialog(note: Obat){
         val alertDialog = AlertDialog.Builder(this)
         alertDialog.apply {
             setTitle("Confirmation")
-            setMessage("Are You Sure to delete this data From ${note.username}?")
+            setMessage("Are You Sure to delete this data From ${note.namaObat}?")
             setNegativeButton("Cancel", DialogInterface.OnClickListener
             { dialogInterface, i ->
                 dialogInterface.dismiss()
@@ -59,7 +59,7 @@ class ShowUser : AppCompatActivity() {
             { dialogInterface, i ->
                 dialogInterface.dismiss()
                 CoroutineScope(Dispatchers.IO).launch {
-                    db.userDao().deleteUser(note)
+                    db.obatDao().deleteObat(note)
                     loadData()
                 }
             })
@@ -73,7 +73,7 @@ class ShowUser : AppCompatActivity() {
     //untuk load data yang tersimpan pada database yang sudah create data
     fun loadData() {
         CoroutineScope(Dispatchers.IO).launch {
-            val notes = db.userDao().getUsers()
+            val notes = db.obatDao().getObats()
             Log.d("ShowUser","dbResponse: $notes")
             withContext(Dispatchers.Main){
                 noteAdapter.setData(notes)
