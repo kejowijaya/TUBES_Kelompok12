@@ -27,7 +27,7 @@ class SplashScreen : AppCompatActivity() {
                 val intent = Intent(this, Register::class.java)
                 startActivity(intent)
                 finish()
-            }, 3000)
+            }, 7000)
 
             val editor: SharedPreferences.Editor =
                 sharedPreferences!!.edit()
