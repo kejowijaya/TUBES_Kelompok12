@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         inputUsername=findViewById(R.id.inputLayoutUsername)
         inputPassword=findViewById(R.id.inputLayoutPassword)
         mainLayout=findViewById(R.id.mainLayout)
-        val btnRegister:Button = findViewById(R.id.btnMainRegister)
+        val btnRegister:Button = findViewById(R.id.btnRegister)
         val btnLogin:Button=findViewById(R.id.btnLogin)
 
         btnRegister.setOnClickListener{
