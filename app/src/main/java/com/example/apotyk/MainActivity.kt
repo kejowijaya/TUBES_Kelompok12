@@ -1,11 +1,21 @@
 package com.example.apotyk
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.os.Build
 import android.view.View
 import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import com.example.apotyk.databinding.ActivityMainBinding
 import com.google.android.material.textfield.TextInputLayout
 
 class MainActivity : AppCompatActivity() {
@@ -13,15 +23,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var inputPassword:TextInputLayout
     private lateinit var mainLayout:ConstraintLayout
     lateinit var  mBundle: Bundle
-
     lateinit var vUsername : String
     lateinit var vPassword : String
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         getBundle()
+
 
         setTitle("User Login")
 
@@ -33,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         btnRegister.setOnClickListener{
             val intent = Intent(this,Register::class.java)
+
             startActivity(intent)
         }
 
@@ -64,4 +77,8 @@ class MainActivity : AppCompatActivity() {
         vUsername = mBundle.getString("username")!!
         vPassword = mBundle.getString("password")!!
     }
+
+
+
+
 }
