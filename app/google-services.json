@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "780147887430",
+    "project_id": "login-8ac7c",
+    "storage_bucket": "login-8ac7c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780147887430:android:e1464c3ac31c08d1456947",
+        "android_client_info": {
+          "package_name": "com.example.apotyk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "780147887430-ho9bh8g94ohbkthr32ojss4pfu8c7c59.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCW0n8N-Qvnnn023JFFTBIvYhKPe5N9gBk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "780147887430-ho9bh8g94ohbkthr32ojss4pfu8c7c59.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
