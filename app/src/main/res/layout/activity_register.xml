@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="#2FBE5E"
+            android:background="@drawable/bcktext"
             android:hint="Username" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="#2FBE5E"
+            android:background="@drawable/bcktext"
             android:hint="Password" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="#2FBE5E"
+            android:background="@drawable/bcktext"
             android:hint="Email" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,7 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="#2FBE5E"
+            android:background="@drawable/bcktext"
             android:hint="Tanggal Lahir" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -134,7 +134,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="#2FBE5E"
+            android:background="@drawable/bcktext"
             android:hint="Nomor Telepon" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -142,9 +142,9 @@
         android:id="@+id/btnRegister"
         android:layout_width="376dp"
         android:layout_height="52dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="18dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="16dp"
         android:text="Register"
         app:backgroundTint="#479106"

@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:background="#2FBE5E"/>
+                android:background="@drawable/bcktext"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:background="#2FBE5E"/>
+                android:background="@drawable/bcktext"/>
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Register"
-            app:backgroundTint="#2FBE5E" />
+            app:backgroundTint="#479106" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogin"
@@ -99,6 +99,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Login"
-            app:backgroundTint="#2FBE5E" />
+            app:backgroundTint="#479106" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

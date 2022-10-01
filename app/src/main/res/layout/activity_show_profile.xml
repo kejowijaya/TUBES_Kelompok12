@@ -4,22 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bck"
     tools:context=".ShowProfile">
+
     <ImageView
         android:id="@+id/gambarProfil"
-        android:src="@drawable/profil"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:src="@drawable/profil"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-    />
+        app:layout_constraintVertical_bias="0.0" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilSessionNama"
         android:layout_width="0dp"
@@ -29,6 +31,7 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gambarProfil"
         app:layout_constraintVertical_bias="0.0">
@@ -38,14 +41,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Username"
-            android:hint="Username" />
+            android:textStyle="bold"
+            android:hint="Username"
+            android:text="Username" />
 
         <TextView
             android:id="@+id/etSessionUsername"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
             android:layout_margin="16dp"
+            android:background="#2FBE5E"
+            android:gravity="center_vertical"
+            android:padding="4dp"
             android:hint="Username" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,13 +72,17 @@
             android:id="@+id/etSessionEmailLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:hint="Email"
             android:text="Email"
             android:layout_margin="16dp"/>
         <TextView
             android:id="@+id/etSessionEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
+            android:background="#2FBE5E"
+            android:gravity="center_vertical"
+            android:padding="4dp"
             android:hint="Email"
             android:layout_margin="16dp"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -92,13 +103,17 @@
             android:id="@+id/etSessionTanggalLahirLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:hint="Tanggal Lahir"
             android:text="Tanggal Lahir"
             android:layout_margin="16dp"/>
         <TextView
             android:id="@+id/etSessionTanggalLahir"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
+            android:background="#2FBE5E"
+            android:gravity="center_vertical"
+            android:padding="4dp"
             android:hint="Tanggal Lahir"
             android:layout_margin="16dp"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -118,13 +133,17 @@
             android:id="@+id/etSessionNomorTeleponLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:hint="Nomor Telepon"
             android:text="Nomor Telepon"
             android:layout_margin="16dp"/>
         <TextView
             android:id="@+id/etSessionNomorTelepon"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
+            android:background="#2FBE5E"
+            android:gravity="center_vertical"
+            android:padding="4dp"
             android:hint="Nomor Telepon"
             android:layout_margin="16dp"/>
     </com.google.android.material.textfield.TextInputLayout>
