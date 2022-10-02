@@ -23,7 +23,7 @@
             android:name=".EditActivity"
             android:exported="false" />
         <activity
-            android:name=".ShowUser"
+            android:name=".ShowObat"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -7,17 +7,11 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import com.example.apotyk.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.lang.Exception
 
 class HomeActivity : AppCompatActivity() {
     lateinit var mBundle: Bundle
@@ -40,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
                     return@setOnNavigationItemReselectedListener
                 }
                 R.id.menu_riwayat -> {
-                    startActivity(Intent(this,ShowUser::class.java))
+                    startActivity(Intent(this,ShowObat::class.java))
                     return@setOnNavigationItemReselectedListener
                 }
                 R.id.menu_user -> {
@@ -50,7 +44,7 @@ class HomeActivity : AppCompatActivity() {
                     return@setOnNavigationItemReselectedListener
                 }
                 R.id.menu_exit -> {
-                    val intent = Intent(this, SplashScreen::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     sendNotifiaction2()
                 }
@@ -90,14 +84,13 @@ class HomeActivity : AppCompatActivity() {
             .setContentText("Silahkan datang kembali dan sehat selalu. Anda sehat kami puas")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setStyle(NotificationCompat.BigTextStyle()
-                .bigText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
-                        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
-                        " when an unknown printer took a galley of type and scrambled it to make a type " +
-                        "specimen book. It has survived not only five centuries, but also the leap into " +
-                        "electronic typesetting, remaining essentially unchanged. " +
-                        "It was popularised in the 1960s with the release of Letraset sheets containing " +
-                        "Lorem Ipsum passages, and more recently with desktop publishing software like Aldus " +
-                        "PageMaker including versions of Lorem Ipsum."))
+                .bigText("Silahkan datang kembali dan sehat selalu. Anda sehat kami puas. " +
+                        "Kesehatan adalah keadaan harmoni dari tubuh, pikiran, dan jiwa. " +
+                        "Nilai berhubungan dengan emosi kita, " +
+                        "sama seperti kita mempraktikkan kebersihan fisik untuk menjaga kesehatan fisik kita, " +
+                        "kita perlu mengamati kebersihan emosional untuk menjaga pikiran dan sikap yang sehat. " +
+                        "Kesehatanlah yang merupakan kekayaan sejati, bukan kepingan emas dan perak. " +
+                        "Merawat diri sendiri bukanlah hal yang egois. Karena ini penting untuk kelangsungan hidup dan kesejahteraan Anda. "))
 
         with(NotificationManagerCompat.from(this)) {
             notify(notificationId2, builder.build())

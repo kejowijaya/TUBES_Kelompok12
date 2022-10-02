@@ -17,9 +17,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ShowUser : AppCompatActivity() {
+class ShowObat : AppCompatActivity() {
     val db by lazy { ObatDB(this) }
-    lateinit var noteAdapter: ShowUserAdapter
+    lateinit var noteAdapter: ShowObatAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_show_user)
@@ -28,8 +28,8 @@ class ShowUser : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        noteAdapter = ShowUserAdapter(arrayListOf(), object :
-            ShowUserAdapter.OnAdapterListener{
+        noteAdapter = ShowObatAdapter(arrayListOf(), object :
+            ShowObatAdapter.OnAdapterListener{
             override fun onClick(note: Obat) {
                 Toast.makeText(applicationContext, note.namaObat, Toast.LENGTH_SHORT).show()
                 intentEdit(note.idObat,Constant.TYPE_READ)
