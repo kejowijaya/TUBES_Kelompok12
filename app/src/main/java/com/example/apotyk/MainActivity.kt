@@ -10,13 +10,18 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.apotyk.databinding.ActivityMainBinding
+import com.example.apotyk.user.User
+import com.example.apotyk.user.UserDB
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.*
+import androidx.lifecycle.lifecycleScope
 
 class MainActivity : AppCompatActivity() {
     private lateinit var inputUsername:TextInputLayout
@@ -25,14 +30,14 @@ class MainActivity : AppCompatActivity() {
     lateinit var  mBundle: Bundle
     lateinit var vUsername : String
     lateinit var vPassword : String
+    val db by lazy { UserDB(this) }
+    lateinit var users: List<User>
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        getBundle()
 
 
         setTitle("User Login")
@@ -50,32 +55,36 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener(View.OnClickListener {
-            var checkLogin=false
             val username:String=inputUsername.getEditText()?.getText().toString()
             val password:String=inputPassword.getEditText()?.getText().toString()
 
             if(username.isEmpty()){
                 inputUsername.setError("Username must be filled with text")
-                checkLogin=false
-            }
-
-            if(password.isEmpty()){
+            }else if(password.isEmpty()){
                 inputPassword.setError("Password must be filled with text")
-                checkLogin=false
+            }else {
+                checkLogin(username, password)
             }
-
-            if(username==vUsername&&password==vPassword)checkLogin=true
-            if(!checkLogin)return@OnClickListener
-            val moveHome=Intent(this@MainActivity,HomeActivity::class.java)
-            moveHome.putExtra("login", mBundle)
-            startActivity(moveHome)
         })
     }
-
-    fun getBundle() {
-        mBundle = intent.getBundleExtra("register")!!
-        vUsername = mBundle.getString("username")!!
-        vPassword = mBundle.getString("password")!!
+    fun checkLogin(username:String,password:String){
+        CoroutineScope(Dispatchers.IO).launch {
+            users = db.userDao().getUsers()
+            users.forEach{
+                if(it.username==username&&it.password==password){
+                    val moveHome=Intent(this@MainActivity,HomeActivity::class.java)
+                    mBundle = Bundle()
+                    mBundle.putInt("id",it.id)
+                    mBundle.putString("username",it.username)
+                    mBundle.putString("password",it.password)
+                    mBundle.putString("tanggalLahir",it.tanggalLahir)
+                    mBundle.putString("email",it.email)
+                    mBundle.putString("nomorTelepon",it.nomorTelepon)
+                    moveHome.putExtra("login", mBundle)
+                    startActivity(moveHome)
+                }
+            }
+        }
     }
 
 

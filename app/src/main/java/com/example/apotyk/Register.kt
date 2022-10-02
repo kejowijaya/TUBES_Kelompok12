@@ -48,31 +48,16 @@ class Register : AppCompatActivity() {
 
         btnRegister.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
-            val mBundle = Bundle()
-            mBundle.putString("username",username.text.toString())
-            mBundle.putString("password",password.text.toString())
-            mBundle.putString("tanggalLahir",tanggalLahir.text.toString())
-            mBundle.putString("email",email.text.toString())
-            mBundle.putString("nomorTelepon",nomorTelepon.text.toString())
-            intent.putExtra("register", mBundle)
             sendNotifiaction2()
-            if(username.text.toString().length == 0){
+            if(username.text.toString().length > 0){
                 CoroutineScope(Dispatchers.IO).launch {
                     db.userDao().addUser(
-                        User(1, "a",
-                            "a", "a", "a", "a")
+                        User((Math.random() * (10000 - 100 + 1)).toInt(), username.text.toString(),
+                            tanggalLahir.text.toString(), email.text.toString(), nomorTelepon.text.toString(), password.text.toString())
                     )
                     finish()
                 }
 
-            }
-
-            CoroutineScope(Dispatchers.IO).launch {
-                db.userDao().addUser(
-                    User((Math.random() * (10000 - 100 + 1)).toInt(), username.text.toString(),
-                        password.text.toString(), email.text.toString(), nomorTelepon.text.toString(), password.text.toString())
-                )
-                finish()
             }
 
             startActivity(intent)
@@ -101,10 +86,6 @@ class Register : AppCompatActivity() {
 
     private fun sendNotifiaction2() {
         val bitmap = BitmapFactory.decodeResource(applicationContext.resources, R.drawable.apotyk)
-        val intent = Intent(this, Register::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-
 
         val broadcastIntent: Intent = Intent(this, Register::class.java)
         val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, broadcastIntent, 0)
