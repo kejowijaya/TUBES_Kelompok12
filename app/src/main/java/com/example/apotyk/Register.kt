@@ -14,46 +14,36 @@ import android.widget.Button
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.apotyk.databinding.ActivityMainBinding
+import com.example.apotyk.databinding.ActivityRegisterBinding
 import com.example.apotyk.user.User
 import com.example.apotyk.user.UserDB
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.android.synthetic.main.activity_register.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class Register : AppCompatActivity() {
     val db by lazy { UserDB(this) }
-    private lateinit var username : TextInputEditText
-    private lateinit var password : TextInputEditText
-    private lateinit var email : TextInputEditText
-    private lateinit var tanggalLahir : TextInputEditText
-    private lateinit var nomorTelepon : TextInputEditText
-    private lateinit var btnRegister : Button
 
-    private var binding: ActivityMainBinding? = null
+    private lateinit var binding: ActivityRegisterBinding
     private var CHANNEL_ID_1 = "channel_notification_1"
     private val notificationId2 = 101
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setTitle("Register")
         createNotificationChannel()
-        username = findViewById(R.id.etUsername)
-        password = findViewById(R.id.etPassword)
-        email = findViewById(R.id.etEmail)
-        nomorTelepon = findViewById(R.id.etNomorTelepon)
-        tanggalLahir = findViewById(R.id.etTanggalLahir)
-        btnRegister = findViewById(R.id.btnRegister)
 
-        btnRegister.setOnClickListener{
+        binding.btnRegister.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             sendNotifiaction2()
-            if(username.text.toString().length > 0){
+            if(binding.etUsername.text.toString().length > 0){
                 CoroutineScope(Dispatchers.IO).launch {
                     db.userDao().addUser(
-                        User((Math.random() * (10000 - 100 + 1)).toInt(), username.text.toString(),
-                            tanggalLahir.text.toString(), email.text.toString(), nomorTelepon.text.toString(), password.text.toString())
+                        User((Math.random() * (10000 - 100 + 1)).toInt(), binding.etUsername.text.toString(),
+                            binding.etTanggalLahir.text.toString(), binding.etEmail.text.toString(), binding.etNomorTelepon.text.toString(), binding.etPassword.text.toString())
                     )
                     finish()
                 }

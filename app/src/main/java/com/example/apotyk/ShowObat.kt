@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.apotyk.user.Constant
 import com.example.apotyk.obat.Obat
 import com.example.apotyk.obat.ObatDB
-import kotlinx.android.synthetic.main.activity_show_user.*
+import kotlinx.android.synthetic.main.activity_show_obat.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +22,7 @@ class ShowObat : AppCompatActivity() {
     lateinit var noteAdapter: ShowObatAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_show_user)
+        setContentView(R.layout.activity_show_obat)
         setupListener()
         setupRecyclerView()
     }

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apotyk.obat.Obat
-import kotlinx.android.synthetic.main.activity_show_user_adapter.view.*
+import kotlinx.android.synthetic.main.activity_show_obat_adapter.view.*
 
 class ShowObatAdapter (private val notes: ArrayList<Obat>, private val
 listener: OnAdapterListener) :
@@ -15,7 +15,7 @@ listener: OnAdapterListener) :
             NoteViewHolder {
         return NoteViewHolder(
 
-            LayoutInflater.from(parent.context).inflate(R.layout.activity_show_user_adapter,parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.activity_show_obat_adapter,parent, false)
         )
     }
     override fun onBindViewHolder(holder: NoteViewHolder, position:

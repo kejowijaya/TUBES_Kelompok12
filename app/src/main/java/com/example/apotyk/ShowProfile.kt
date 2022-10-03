@@ -3,19 +3,18 @@ package com.example.apotyk
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
+import com.example.apotyk.databinding.ActivityShowProfileBinding
 
 class ShowProfile : AppCompatActivity() {
     lateinit var mBundle: Bundle
-    lateinit var editUser: Button
+    private lateinit var binding: ActivityShowProfileBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_show_profile)
+        binding = ActivityShowProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         mBundle = intent.getBundleExtra("login")!!
         setData()
-        editUser = findViewById(R.id.btnEditUser)
-        editUser.setOnClickListener {
+        binding.btnEditUser.setOnClickListener {
             val intent = Intent(this, EditProfile::class.java)
             intent.putExtra("user", mBundle)
             startActivity(intent)
@@ -23,10 +22,10 @@ class ShowProfile : AppCompatActivity() {
     }
 
     fun setData() {
-        val username: TextView = findViewById(R.id.etSessionUsername)
-        val email: TextView = findViewById(R.id.etSessionEmail)
-        val tanggalLahir: TextView = findViewById(R.id.etSessionTanggalLahir)
-        val nomorTelepon: TextView = findViewById(R.id.etSessionNomorTelepon)
+        val username = binding.etSessionUsername
+        val email = binding.etSessionEmail
+        val tanggalLahir = binding.etSessionTanggalLahir
+        val nomorTelepon = binding.etSessionNomorTelepon
         username.text = mBundle.getString("username")
         email.text = mBundle.getString("email")
         tanggalLahir.text = mBundle.getString("tanggalLahir")

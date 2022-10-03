@@ -49,7 +49,8 @@
             android:layout_marginBottom="20dp"
             android:hint="Username"
             android:textColorHint="#FFFFFFFF"
-            app:errorEnabled="true">
+            app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_person">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -66,7 +67,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="Password"
             android:textColorHint="#FFFFFFFF"
-            app:errorEnabled="true">
+            app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_lock">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
