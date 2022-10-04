@@ -21,10 +21,10 @@ class FragmentObat : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(context)
         val adapter : RVObatAdapter = RVObatAdapter(Obat.listOfObat)
-        val rvDosen : RecyclerView = view.findViewById(R.id.rv_obat)
-        rvDosen.layoutManager = layoutManager
-        rvDosen.setHasFixedSize(true)
-        rvDosen.adapter = adapter
+        val rvObat : RecyclerView = view.findViewById(R.id.rv_obat)
+        rvObat.layoutManager = layoutManager
+        rvObat.setHasFixedSize(true)
+        rvObat.adapter = adapter
 
     }
 }
