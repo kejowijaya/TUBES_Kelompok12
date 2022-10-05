@@ -34,7 +34,9 @@ class HomeActivity : AppCompatActivity() {
                     return@setOnNavigationItemReselectedListener
                 }
                 R.id.menu_riwayat -> {
-                    startActivity(Intent(this,ShowObat::class.java))
+                    val moveRiwayat = Intent(this,ShowObat::class.java)
+                    moveRiwayat.putExtra("login", mBundle)
+                    startActivity(moveRiwayat)
                     return@setOnNavigationItemReselectedListener
                 }
                 R.id.menu_user -> {

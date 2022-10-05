@@ -12,7 +12,8 @@
         android:icon="@drawable/ic_person"
         android:title="User"/>
     <item android:id="@+id/menu_exit"
-        android:icon="@drawable/ic_exit"/>
+        android:icon="@drawable/ic_exit"
+        android:title="Exit"/>
 
 
 </menu>

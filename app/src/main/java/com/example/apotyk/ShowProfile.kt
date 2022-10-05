@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.apotyk.databinding.ActivityShowProfileBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ShowProfile : AppCompatActivity() {
     lateinit var mBundle: Bundle
@@ -19,7 +20,32 @@ class ShowProfile : AppCompatActivity() {
             intent.putExtra("user", mBundle)
             startActivity(intent)
         }
+        binding.bottomNav.selectedItemId = R.id.menu_user
+        binding.bottomNav.setOnNavigationItemReselectedListener {
+            when (it.itemId) {
+                R.id.menu_obat-> {
+                    val moveHome = Intent(this,HomeActivity::class.java)
+                    moveHome.putExtra("login", mBundle)
+                    startActivity(moveHome)
+                    return@setOnNavigationItemReselectedListener
+                }
+                R.id.menu_riwayat -> {
+                    val moveRiwayat = Intent(this,ShowObat::class.java)
+                    moveRiwayat.putExtra("login", mBundle)
+                    startActivity(moveRiwayat)
+                    return@setOnNavigationItemReselectedListener
+                }
+                R.id.menu_user -> {
+
+                }
+                R.id.menu_exit -> {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
     }
+
 
     fun setData() {
         val username = binding.etSessionUsername

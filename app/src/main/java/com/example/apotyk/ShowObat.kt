@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.apotyk.user.Constant
 import com.example.apotyk.obat.Obat
 import com.example.apotyk.obat.ObatDB
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_show_obat.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,13 +19,41 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ShowObat : AppCompatActivity() {
+    lateinit var mBundle: Bundle
+    lateinit var bottomNav : BottomNavigationView
     val db by lazy { ObatDB(this) }
     lateinit var noteAdapter: ShowObatAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mBundle = intent.getBundleExtra("login")!!
         setContentView(R.layout.activity_show_obat)
         setupListener()
         setupRecyclerView()
+        bottomNav = findViewById(R.id.bottomNav) as BottomNavigationView
+        bottomNav.selectedItemId = R.id.menu_riwayat
+        bottomNav.setOnNavigationItemReselectedListener {
+            when (it.itemId) {
+                R.id.menu_obat-> {
+                    val moveHome = Intent(this,HomeActivity::class.java)
+                    moveHome.putExtra("login", mBundle)
+                    startActivity(moveHome)
+                    return@setOnNavigationItemReselectedListener
+                }
+                R.id.menu_riwayat -> {
+
+                }
+                R.id.menu_user -> {
+                    val moveProfile = Intent(this,ShowProfile::class.java)
+                    moveProfile.putExtra("login", mBundle)
+                    startActivity(moveProfile)
+                    return@setOnNavigationItemReselectedListener
+                }
+                R.id.menu_exit -> {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
     }
 
     private fun setupRecyclerView() {

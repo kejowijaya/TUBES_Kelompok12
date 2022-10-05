@@ -150,18 +150,30 @@
             android:hint="Nomor Telepon"
             android:padding="9dp" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:id="@+id/btnEditUser"
         android:layout_width="376dp"
         android:layout_height="52dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="64dp"
+        android:backgroundTint="#479106"
         android:text="Edit User"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilSessionNomorTelepon"
-        app:layout_constraintVertical_bias="0.573"
-        android:backgroundTint="#479106"/>
+        app:layout_constraintTop_toBottomOf="@+id/tilSessionNomorTelepon" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+        app:menu="@menu/home_menu"
+        android:background="#2FBE5E"
+        android:scrollIndicators="left"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
