@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "780147887430",
-    "project_id": "login-8ac7c",
-    "storage_bucket": "login-8ac7c.appspot.com"
+    "project_number": "844731694185",
+    "project_id": "login-20274",
+    "storage_bucket": "login-20274.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:780147887430:android:e1464c3ac31c08d1456947",
+        "mobilesdk_app_id": "1:844731694185:android:3e4df4014938a397f5b6f8",
         "android_client_info": {
           "package_name": "com.example.apotyk"
         }
       },
       "oauth_client": [
         {
-          "client_id": "780147887430-ho9bh8g94ohbkthr32ojss4pfu8c7c59.apps.googleusercontent.com",
+          "client_id": "844731694185-o7dh871drbq8s7o49o1uhs8k82qdq45u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCW0n8N-Qvnnn023JFFTBIvYhKPe5N9gBk"
+          "current_key": "AIzaSyBChnH8SebpJjZcvChaIektnmwZ3oAc4Zk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "780147887430-ho9bh8g94ohbkthr32ojss4pfu8c7c59.apps.googleusercontent.com",
+              "client_id": "844731694185-o7dh871drbq8s7o49o1uhs8k82qdq45u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
