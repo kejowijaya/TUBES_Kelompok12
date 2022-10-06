@@ -51,11 +51,11 @@ class Register : AppCompatActivity() {
                 check = false
             }
             if(binding.etNomorTelepon.text?.isEmpty() == true) {
-                binding.etEmail.error = "Please enter nomor telepon"
+                binding.etNomorTelepon.error = "Please enter nomor telepon"
                 check = false
             }
             if(binding.etTanggalLahir.text?.isEmpty() == true) {
-                binding.etEmail.error = "Please enter tanggal lahir"
+                binding.etTanggalLahir.error = "Please enter tanggal lahir"
                 check = false
             }
             val intent = Intent(this, MainActivity::class.java)
