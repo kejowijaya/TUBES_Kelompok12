@@ -37,9 +37,30 @@ class Register : AppCompatActivity() {
         createNotificationChannel()
 
         binding.btnRegister.setOnClickListener{
+            var check = true
+            if(binding.etUsername.text?.isEmpty() == true) {
+                binding.etUsername.error = "Please enter username"
+                check = false
+            }
+            if(binding.etPassword.text?.isEmpty() == true) {
+                binding.etPassword.error = "Please enter password"
+                check = false
+            }
+            if(binding.etEmail.text?.isEmpty() == true) {
+                binding.etEmail.error = "Please enter email"
+                check = false
+            }
+            if(binding.etNomorTelepon.text?.isEmpty() == true) {
+                binding.etNomorTelepon.error = "Please enter nomor telepon"
+                check = false
+            }
+            if(binding.etTanggalLahir.text?.isEmpty() == true) {
+                binding.etTanggalLahir.error = "Please enter tanggal lahir"
+                check = false
+            }
             val intent = Intent(this, MainActivity::class.java)
-            sendNotifiaction2()
-            if(binding.etUsername.text.toString().length > 0){
+
+            if(check){
                 CoroutineScope(Dispatchers.IO).launch {
                     db.userDao().addUser(
                         User((Math.random() * (10000 - 100 + 1)).toInt(), binding.etUsername.text.toString(),
@@ -47,10 +68,11 @@ class Register : AppCompatActivity() {
                     )
                     finish()
                 }
+                sendNotifiaction2()
+                startActivity(intent)
 
             }
 
-            startActivity(intent)
         }
 
     }
