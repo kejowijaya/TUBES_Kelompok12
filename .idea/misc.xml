@@ -11,10 +11,13 @@
         <entry key="..\:/Kuliah/PemrogramanBerbasisPlatform/Modul5/UGD/app/src/main/res/layout/activity_register.xml" value="0.10989583333333333" />
         <entry key="..\:/Kuliah/PemrogramanBerbasisPlatform/Modul5/UGD/app/src/main/res/layout/activity_show_profile.xml" value="0.4" />
         <entry key="..\:/Kuliah/PemrogramanBerbasisPlatform/Modul5/UGD/app/src/main/res/layout/rv_item_obat.xml" value="0.1" />
+        <entry key="..\:/TUBES_Kelompok12/app/src/main/res/drawable/bg_circle.xml" value="0.1835" />
+        <entry key="..\:/TUBES_Kelompok12/app/src/main/res/layout/activity_camera.xml" value="0.16757246376811594" />
         <entry key="..\:/TUBES_Kelompok12/app/src/main/res/layout/activity_edit.xml" value="0.16757246376811594" />
         <entry key="..\:/TUBES_Kelompok12/app/src/main/res/layout/activity_edit_profile.xml" value="0.16757246376811594" />
         <entry key="..\:/TUBES_Kelompok12/app/src/main/res/layout/activity_home.xml" value="0.16757246376811594" />
         <entry key="..\:/TUBES_Kelompok12/app/src/main/res/layout/activity_main.xml" value="0.16757246376811594" />
+        <entry key="..\:/TUBES_Kelompok12/app/src/main/res/layout/activity_map.xml" value="0.16757246376811594" />
         <entry key="..\:/TUBES_Kelompok12/app/src/main/res/layout/activity_register.xml" value="0.33" />
         <entry key="..\:/TUBES_Kelompok12/app/src/main/res/layout/activity_show_obat.xml" value="0.16757246376811594" />
         <entry key="..\:/TUBES_Kelompok12/app/src/main/res/layout/activity_show_obat_adapter.xml" value="0.16757246376811594" />
@@ -23,8 +26,10 @@
         <entry key="..\:/TUBES_Kelompok12/app/src/main/res/layout/activity_show_user_adapter.xml" value="0.16757246376811594" />
         <entry key="..\:/TUBES_Kelompok12/app/src/main/res/layout/fragment_obat.xml" value="0.16757246376811594" />
         <entry key="..\:/TUBES_Kelompok12/app/src/main/res/layout/fragment_profile.xml" value="0.16757246376811594" />
+        <entry key="..\:/TUBES_Kelompok12/app/src/main/res/layout/layout_tooltip.xml" value="0.16757246376811594" />
         <entry key="..\:/TUBES_Kelompok12/app/src/main/res/layout/rv_item_obat.xml" value="0.33" />
         <entry key="..\:/TUBES_Kelompok12/app/src/main/res/layout/splash_screen.xml" value="0.16757246376811594" />
+        <entry key="..\:/TUBES_Kelompok12/app/src/main/res/menu/home_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/UGD3_12-master/app/src/main/res/drawable/ic_person.xml" value="0.1" />
         <entry key="..\:/UGD3_12-master/app/src/main/res/layout/activity_edit.xml" value="0.20416666666666666" />
         <entry key="..\:/UGD3_12-master/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />

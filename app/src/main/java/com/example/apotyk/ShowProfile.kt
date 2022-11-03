@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.apotyk.databinding.ActivityShowProfileBinding
+import com.example.apotyk.maps.MapActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ShowProfile : AppCompatActivity() {
@@ -41,6 +42,10 @@ class ShowProfile : AppCompatActivity() {
                 R.id.menu_exit -> {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
+                }
+                R.id.menu_map -> {
+                    val moveMap = Intent(this, MapActivity::class.java)
+                    startActivity(moveMap)
                 }
             }
         }

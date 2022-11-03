@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.apotyk.maps.MapActivity
 import com.example.apotyk.user.Constant
 import com.example.apotyk.obat.Obat
 import com.example.apotyk.obat.ObatDB
@@ -51,6 +52,10 @@ class ShowObat : AppCompatActivity() {
                 R.id.menu_exit -> {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
+                }
+                R.id.menu_map -> {
+                    val moveMap = Intent(this, MapActivity::class.java)
+                    startActivity(moveMap)
                 }
             }
         }

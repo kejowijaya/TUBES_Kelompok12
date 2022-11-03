@@ -1,0 +1,35 @@
+{
+  "results" : [
+    {
+      "geometry" : {
+        "location" : {
+          "lat" : -7.779433,
+          "lng" : 110.415782
+        }
+      },
+      "name" : "Kampus 3 Universitas Atma Jaya Yogyakarta",
+      "vicinity" : "Jl. Babarsari No.43, Janti, Caturtunggal, Kec.Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281"
+    },
+    {
+      "geometry" : {
+        "location" : {
+          "lat" : -7.777447190308801,
+          "lng" : 110.41331256420398
+        }
+      },
+      "name" : "Apotik K24 Babarsari",
+      "vicinity" : "Jl. Babarsari No.13 B, Janti, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281"
+    },
+    {
+      "geometry" : {
+        "location" : {
+          "lat" : -7.76883430841183,
+          "lng" : 110.40947717015582
+        }
+      },
+      "name" : "Apotik Kimia Farma Seturan",
+      "vicinity" : "Jl. Seturan Raya No.Blok C, Kledokan, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281"
+    }
+  ],
+  "status": "OK"
+}
