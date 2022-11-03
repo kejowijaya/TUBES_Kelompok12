@@ -3,6 +3,8 @@ package com.example.apotyk
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
 import com.example.apotyk.databinding.ActivityShowProfileBinding
 import com.example.apotyk.maps.MapActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -10,11 +12,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class ShowProfile : AppCompatActivity() {
     lateinit var mBundle: Bundle
     private lateinit var binding: ActivityShowProfileBinding
+    private lateinit var fotoProfil: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityShowProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mBundle = intent.getBundleExtra("login")!!
+        fotoProfil = findViewById(R.id.gambarProfil)
+        fotoProfil.setOnClickListener {
+            val intent = Intent(this, Camera::class.java)
+            intent.putExtra("login", mBundle)
+            startActivity(intent)
+        }
         setData()
         binding.btnEditUser.setOnClickListener {
             val intent = Intent(this, EditProfile::class.java)
