@@ -8,12 +8,18 @@ import com.example.apotyk.Camera
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.LinearLayout
+import android.widget.SearchView
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.android.volley.RequestQueue
+import com.android.volley.toolbox.Volley
 import com.example.apotyk.databinding.ActivityMainBinding
 import com.example.apotyk.maps.MapActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class HomeActivity : AppCompatActivity() {
     lateinit var mBundle: Bundle
@@ -21,14 +27,26 @@ class HomeActivity : AppCompatActivity() {
     private var binding: ActivityMainBinding? = null
     private var CHANNEL_ID_2 = "channel_notification_2"
     private val notificationId2 = 102
-
+    private lateinit var tombolTambah: FloatingActionButton
+    private var queue: RequestQueue? = null
+    private var srMahasiswa: SwipeRefreshLayout? = null
+    private var adapter: RVObatAdapter? = null
+    private var svMahasiswa: SearchView? = null
+    private var layoutLoading: LinearLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         loadFragment(FragmentObat())
         createNotificationChannel()
+        queue = Volley.newRequestQueue(this)
         mBundle = intent.getBundleExtra("login")!!
         bottomNav = findViewById(R.id.bottomNav) as BottomNavigationView
+        tombolTambah = findViewById(R.id.fab_add)
+        tombolTambah.setOnClickListener {
+            val move = Intent(this, AddEditObatActivity::class.java)
+            move.putExtra("login", mBundle)
+            startActivity(move)
+        }
         bottomNav.setOnNavigationItemReselectedListener {
             when (it.itemId) {
                 R.id.menu_obat-> {

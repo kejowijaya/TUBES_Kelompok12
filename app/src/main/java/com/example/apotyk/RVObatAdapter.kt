@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.apotyk.databinding.RvItemObatBinding
-import com.example.apotyk.entity.Obat
+import com.example.apotyk.model.Obat
 
 class RVObatAdapter(private val data: Array<Obat>) : RecyclerView.Adapter<RVObatAdapter.viewHolder>() {
     private lateinit var binding: RvItemObatBinding

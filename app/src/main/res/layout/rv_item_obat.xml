@@ -4,7 +4,7 @@
 
     <data>
         <variable
-            type="com.example.apotyk.entity.Obat"
+            type="com.example.apotyk.model.Obat"
             name="obat"/>
 
     </data>
@@ -42,7 +42,6 @@
             android:id="@+id/gambar_obat"
             android:layout_width="103dp"
             android:layout_height="76dp"
-            app:imageResource="@{obat.gambar}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
