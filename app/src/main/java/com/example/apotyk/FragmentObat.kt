@@ -14,8 +14,6 @@ import com.android.volley.toolbox.StringRequest
 import com.example.apotyk.api.ObatApi
 import com.example.apotyk.model.Obat
 import com.google.gson.Gson
-import org.json.JSONObject
-import java.nio.charset.StandardCharsets
 
 class FragmentObat : Fragment() {
     override fun onCreateView(
@@ -29,22 +27,7 @@ class FragmentObat : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(context)
         var adapter: RVObatAdapter? = null
-        val stringRequest: StringRequest = object :
-            StringRequest(Method.GET, ObatApi.GET_ALL_URL, Response.Listener { response ->
-                val gson = Gson()
-                var obat: Array<Obat> = gson.fromJson(response, Array<Obat>::class.java)
 
-                adapter = RVObatAdapter(obat)
-            }, Response.ErrorListener { error ->
-                Toast.makeText(context, error.message, Toast.LENGTH_SHORT).show()
-            }) {
-            @Throws(AuthFailureError::class)
-            override fun getHeaders(): Map<String, String> {
-                val headers = HashMap<String, String>()
-                headers["Accept"] = "application/json"
-                return headers
-            }
-        }
         val rvObat : RecyclerView = view.findViewById(R.id.rv_obat)
         rvObat.layoutManager = layoutManager
         rvObat.setHasFixedSize(true)

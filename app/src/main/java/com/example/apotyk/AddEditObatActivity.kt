@@ -106,15 +106,12 @@ class AddEditObatActivity : AppCompatActivity() {
                     return headers
                 }
 
-                @Throws(AuthFailureError::class)
-                override fun getBody(): ByteArray {
-                    val gson = Gson()
-                    val requestBody = gson.toJson(obat)
-                    return requestBody.toByteArray(StandardCharsets.UTF_8)
-                }
-
-                override fun getBodyContentType(): String {
-                    return "application/json"
+                override fun getParams(): MutableMap<String, String>? {
+                    val params = HashMap<String, String>()
+                    params["nama"] = obat.nama
+                    params["jenis"] = obat.jenis
+                    params["harga"] = obat.harga
+                    return params
                 }
             }
 
@@ -164,51 +161,58 @@ class AddEditObatActivity : AppCompatActivity() {
                 return headers
             }
 
-            @Throws(AuthFailureError::class)
-            override fun getBody(): ByteArray {
-                val gson = Gson()
-                val requestBody = gson.toJson(obat)
-                return requestBody.toByteArray(StandardCharsets.UTF_8)
-            }
-
-            override fun getBodyContentType(): String {
-                return "application/json"
+            override fun getParams(): MutableMap<String, String>? {
+                val params = HashMap<String, String>()
+                params["nama"] = obat.nama
+                params["jenis"] = obat.jenis
+                params["harga"] = obat.harga
+                return params
             }
         }
         queue!!.add(stringRequest)
     }
+
+    fun setExposedDropdownMenu(){
+        val adapterJenis: ArrayAdapter<String> = ArrayAdapter<String>(
+            this,
+            R.layout.item_list, JENIS_LIST)
+        edJenis!!.setAdapter(adapterJenis)
+    }
+
     private fun getObatById(id: Long) {
 
         setLoading(true)
         val stringRequest: StringRequest = object :
             StringRequest(Method.GET, ObatApi.GET_BY_ID_URL + id, Response.Listener { response ->
                 val gson = Gson()
-                val obat = gson.fromJson(response, Obat::class.java)
+                val json = JSONObject(response)
+                var obat = gson.fromJson(
+                    json.getJSONArray("data")[0].toString(),
+                    Obat::class.java
+                )
 
                 etNama!!.setText(obat.nama)
                 edJenis!!.setText(obat.jenis)
                 etHarga!!.setText(obat.harga)
 
-                val adapterJenis = ArrayAdapter(this, R.layout.item_list, JENIS_LIST)
-                edJenis!!.setAdapter(adapterJenis)
-
-                Toast.makeText(this@AddEditObatActivity, "Data berhasil diambil!", Toast.LENGTH_SHORT).show()
+                setExposedDropdownMenu()
+                Toast.makeText(this@AddEditObatActivity,"Data berhasil diambil", Toast.LENGTH_SHORT).show()
                 setLoading(false)
-            }, Response.ErrorListener { error ->
-                setLoading(false)
-
-                try {
-                    val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
-                    val errors = JSONObject(responseBody)
-                    Toast.makeText(
-                        this@AddEditObatActivity,
-                        errors.getString("message"),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } catch (e: Exception) {
-                    Toast.makeText(this@AddEditObatActivity, e.message, Toast.LENGTH_SHORT).show()
-                }
-            }) {
+            },
+                Response.ErrorListener{ error ->
+                    setLoading(false)
+                    try{
+                        val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                        val errors = JSONObject(responseBody)
+                        Toast.makeText(
+                            this,
+                            errors.getString("message"),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } catch (e: Exception){
+                        Toast.makeText(this@AddEditObatActivity, e.message, Toast.LENGTH_SHORT).show()
+                    }
+                }) {
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String> {
                 val headers = HashMap<String, String>()

@@ -1,25 +1,38 @@
 package com.example.apotyk
 
+import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
-import com.example.apotyk.Camera
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.android.volley.AuthFailureError
 import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.apotyk.model.Obat
+import com.example.apotyk.api.ObatApi
 import com.example.apotyk.databinding.ActivityMainBinding
 import com.example.apotyk.maps.MapActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
+import org.json.JSONObject
+import java.nio.charset.StandardCharsets
 
 class HomeActivity : AppCompatActivity() {
     lateinit var mBundle: Bundle
@@ -29,16 +42,51 @@ class HomeActivity : AppCompatActivity() {
     private val notificationId2 = 102
     private lateinit var tombolTambah: FloatingActionButton
     private var queue: RequestQueue? = null
-    private var srMahasiswa: SwipeRefreshLayout? = null
+    private var srObat: SwipeRefreshLayout? = null
     private var adapter: RVObatAdapter? = null
-    private var svMahasiswa: SearchView? = null
+    private var svObat: SearchView? = null
     private var layoutLoading: LinearLayout? = null
+
+
+    companion object{
+        const val LAUNCH_ADD_ACTIVITY = 123
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        loadFragment(FragmentObat())
-        createNotificationChannel()
+
         queue = Volley.newRequestQueue(this)
+        layoutLoading = findViewById(R.id.layout_loading)
+        srObat = findViewById(R.id.sr_obat)
+        svObat = findViewById(R.id.sv_obat)
+
+        srObat?.setOnRefreshListener (SwipeRefreshLayout.OnRefreshListener { allObat() })
+        svObat?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                adapter!!.filter.filter(p0)
+                return false
+            }
+        })
+
+        val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add)
+        fabAdd.setOnClickListener {
+            val i = Intent(this@HomeActivity,  AddEditObatActivity::class.java)
+            startActivityForResult(i, LAUNCH_ADD_ACTIVITY)
+        }
+
+        val rvProduk = findViewById<RecyclerView>(R.id.rv_obat)
+        adapter = RVObatAdapter(ArrayList(), this)
+        rvProduk.layoutManager = LinearLayoutManager(this)
+        rvProduk.adapter = adapter
+        allObat()
+
+        createNotificationChannel()
+
         mBundle = intent.getBundleExtra("login")!!
         bottomNav = findViewById(R.id.bottomNav) as BottomNavigationView
         tombolTambah = findViewById(R.id.fab_add)
@@ -50,8 +98,7 @@ class HomeActivity : AppCompatActivity() {
         bottomNav.setOnNavigationItemReselectedListener {
             when (it.itemId) {
                 R.id.menu_obat-> {
-                    loadFragment(FragmentObat())
-                    return@setOnNavigationItemReselectedListener
+
                 }
                 R.id.menu_riwayat -> {
                     val moveRiwayat = Intent(this,ShowObat::class.java)
@@ -121,6 +168,102 @@ class HomeActivity : AppCompatActivity() {
 
         with(NotificationManagerCompat.from(this)) {
             notify(notificationId2, builder.build())
+        }
+    }
+
+    private fun allObat(){
+        srObat!!.isRefreshing = true
+        val stringRequest : StringRequest = object:
+            StringRequest(Method.GET, ObatApi.GET_ALL_URL, Response.Listener { response ->
+                val gson = Gson()
+                val json = JSONObject(response)
+                var obat : Array<Obat> = gson.fromJson(
+                    json.getJSONArray("data").toString(),
+                    Array<Obat>::class.java
+                )
+
+                adapter!!.setObatList(obat)
+                adapter!!.filter.filter(svObat!!.query)
+                srObat!!.isRefreshing = false
+
+                if(!obat.isEmpty())
+                    Toast.makeText(this@HomeActivity, "Data berhasil diambil", Toast.LENGTH_SHORT).show()
+                else
+                    Toast.makeText(this@HomeActivity, "Data Kosong!", Toast.LENGTH_SHORT).show()
+
+            }, Response.ErrorListener { error ->
+                srObat!!.isRefreshing = false
+                try {
+                    val responseBody =
+                        String(error.networkResponse.data, StandardCharsets.UTF_8)
+                    val errors = JSONObject(responseBody)
+                    Toast.makeText(this@HomeActivity, errors.getString("message"), Toast.LENGTH_SHORT).show()
+                } catch (e: Exception){
+                    Toast.makeText(this@HomeActivity, e.message, Toast.LENGTH_SHORT).show()
+                }
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Accept"] = "application/json"
+                return headers
+            }
+
+        }
+        queue!!.add(stringRequest)
+    }
+
+    fun deleteObat(id: Long){
+        setLoading(true)
+        val stringRequest: StringRequest = object :
+            StringRequest(Method.DELETE, ObatApi.DELETE_URL+id, Response.Listener { response ->
+                setLoading(false)
+
+                val gson = Gson()
+                var obat = gson.fromJson(response, Obat::class.java)
+                if(obat != null)
+                    Toast.makeText(this@HomeActivity, "Data Berhasil Dihapus", Toast.LENGTH_SHORT).show()
+
+                allObat()
+            }, Response.ErrorListener { error ->
+                setLoading(false)
+                try {
+                    val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                    val errors = JSONObject(responseBody)
+                    Toast.makeText(this@HomeActivity, errors.getString("message"), Toast.LENGTH_SHORT).show()
+                } catch (e: java.lang.Exception){
+                    Toast.makeText(this@HomeActivity, e.message, Toast.LENGTH_SHORT).show()
+                }
+            }){
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val headers = java.util.HashMap<String, String>()
+                headers["Accept"] = "application/json"
+                return headers
+            }
+        }
+        queue!!.add(stringRequest)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == LAUNCH_ADD_ACTIVITY){
+            if(resultCode == Activity.RESULT_OK){
+                allObat()
+            }
+        }
+    }
+
+    private fun setLoading(isLoading: Boolean){
+        if(isLoading){
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+            )
+            layoutLoading!!.visibility = View.INVISIBLE
+        }else{
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+            layoutLoading!!.visibility = View.INVISIBLE
         }
     }
 
