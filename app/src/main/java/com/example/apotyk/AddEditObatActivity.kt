@@ -26,22 +26,27 @@ class AddEditObatActivity : AppCompatActivity() {
     private var etHarga: EditText? = null
     private var layoutLoading: LinearLayout? = null
     private var queue: RequestQueue? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_edit_obat)
+
         queue = Volley.newRequestQueue(this)
         etNama = findViewById(R.id.et_nama)
         edJenis = findViewById(R.id.ed_jenis)
         etHarga = findViewById(R.id.et_harga)
         layoutLoading = findViewById(R.id.layout_loading)
+
         val adapterJenis = ArrayAdapter(this, R.layout.item_list, JENIS_LIST)
         edJenis!!.setAdapter(adapterJenis)
+
         val btnCancel = findViewById<Button>(R.id.btn_cancel)
         btnCancel.setOnClickListener { finish() }
+
         val btnSave = findViewById<Button>(R.id.btn_save)
         val tvTitle = findViewById<TextView>(R.id.tv_title)
-        val id = intent.getLongExtra("id", -1)
 
+        val id = intent.getLongExtra("id", -1)
         if (id == -1L) {
             tvTitle.setText("Tambah Obat")
             btnSave.setOnClickListener { createObat() }
