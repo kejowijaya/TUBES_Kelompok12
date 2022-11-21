@@ -19,14 +19,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ShowObat : AppCompatActivity() {
-    lateinit var mBundle: Bundle
+class ShowRiwayat : AppCompatActivity() {
     lateinit var bottomNav : BottomNavigationView
     val db by lazy { ObatDB(this) }
-    lateinit var noteAdapter: ShowObatAdapter
+    lateinit var noteAdapter: ShowRiwayatAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBundle = intent.getBundleExtra("login")!!
         setContentView(R.layout.activity_show_obat)
         setupListener()
         setupRecyclerView()
@@ -36,7 +34,6 @@ class ShowObat : AppCompatActivity() {
             when (it.itemId) {
                 R.id.menu_obat-> {
                     val moveHome = Intent(this,HomeActivity::class.java)
-                    moveHome.putExtra("login", mBundle)
                     startActivity(moveHome)
                     return@setOnNavigationItemReselectedListener
                 }
@@ -45,7 +42,6 @@ class ShowObat : AppCompatActivity() {
                 }
                 R.id.menu_user -> {
                     val moveProfile = Intent(this,ShowProfile::class.java)
-                    moveProfile.putExtra("login", mBundle)
                     startActivity(moveProfile)
                     return@setOnNavigationItemReselectedListener
                 }
@@ -62,8 +58,8 @@ class ShowObat : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        noteAdapter = ShowObatAdapter(arrayListOf(), object :
-            ShowObatAdapter.OnAdapterListener{
+        noteAdapter = ShowRiwayatAdapter(arrayListOf(), object :
+            ShowRiwayatAdapter.OnAdapterListener{
             override fun onClick(note: Obat) {
                 Toast.makeText(applicationContext, note.namaObat, Toast.LENGTH_SHORT).show()
                 intentEdit(note.idObat,Constant.TYPE_READ)
@@ -122,7 +118,7 @@ class ShowObat : AppCompatActivity() {
     //pick data dari Id yang sebagai primary key
     fun intentEdit(noteId : Int, intentType: Int){
         startActivity(
-            Intent(applicationContext, EditActivity::class.java)
+            Intent(applicationContext, EditRiwayatActivity::class.java)
                 .putExtra("intent_id", noteId)
                 .putExtra("intent_type", intentType)
         )

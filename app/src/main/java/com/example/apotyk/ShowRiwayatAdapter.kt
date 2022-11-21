@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.apotyk.obat.Obat
 import kotlinx.android.synthetic.main.activity_show_obat_adapter.view.*
 
-class ShowObatAdapter (private val notes: ArrayList<Obat>, private val
+class ShowRiwayatAdapter (private val notes: ArrayList<Obat>, private val
 listener: OnAdapterListener) :
-    RecyclerView.Adapter<ShowObatAdapter.NoteViewHolder>() {
+    RecyclerView.Adapter<ShowRiwayatAdapter.NoteViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             NoteViewHolder {
         return NoteViewHolder(

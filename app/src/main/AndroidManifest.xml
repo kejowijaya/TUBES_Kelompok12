@@ -27,7 +27,7 @@
             android:name=".maps.MapActivity"
             android:exported="false" />
         <activity
-            android:name=".Camera"
+            android:name=".camera.Camera"
             android:exported="false" />
         <activity
             android:name=".EditProfile"
@@ -36,10 +36,10 @@
             android:name=".ShowProfile"
             android:exported="false" />
         <activity
-            android:name=".EditActivity"
+            android:name=".EditRiwayatActivity"
             android:exported="false" />
         <activity
-            android:name=".ShowObat"
+            android:name=".ShowRiwayat"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -61,14 +61,14 @@
         </activity>
 
         <service
-            android:name=".MyFirebaseMessagingService"
+            android:name=".notification.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <receiver android:name=".NotificationReceiver" />
+        <receiver android:name=".notification.NotificationReceiver" />
     </application>
 
 </manifest>

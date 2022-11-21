@@ -1,4 +1,4 @@
-package com.example.apotyk
+package com.example.apotyk.notification
 
 import android.content.BroadcastReceiver
 import android.content.Context

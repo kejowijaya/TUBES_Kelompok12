@@ -35,7 +35,6 @@ import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 
 class HomeActivity : AppCompatActivity() {
-    lateinit var mBundle: Bundle
     lateinit var bottomNav : BottomNavigationView
     private var binding: ActivityMainBinding? = null
     private var CHANNEL_ID_2 = "channel_notification_2"
@@ -87,12 +86,10 @@ class HomeActivity : AppCompatActivity() {
 
         createNotificationChannel()
 
-        mBundle = intent.getBundleExtra("login")!!
         bottomNav = findViewById(R.id.bottomNav) as BottomNavigationView
         tombolTambah = findViewById(R.id.fab_add)
         tombolTambah.setOnClickListener {
             val move = Intent(this, AddEditObatActivity::class.java)
-            move.putExtra("login", mBundle)
             startActivity(move)
         }
         bottomNav.setOnNavigationItemReselectedListener {
@@ -101,14 +98,12 @@ class HomeActivity : AppCompatActivity() {
 
                 }
                 R.id.menu_riwayat -> {
-                    val moveRiwayat = Intent(this,ShowObat::class.java)
-                    moveRiwayat.putExtra("login", mBundle)
+                    val moveRiwayat = Intent(this,ShowRiwayat::class.java)
                     startActivity(moveRiwayat)
                     return@setOnNavigationItemReselectedListener
                 }
                 R.id.menu_user -> {
                     val moveProfile = Intent(this,ShowProfile::class.java)
-                    moveProfile.putExtra("login", mBundle)
                     startActivity(moveProfile)
                     return@setOnNavigationItemReselectedListener
                 }

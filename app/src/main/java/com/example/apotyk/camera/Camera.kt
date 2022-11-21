@@ -1,4 +1,4 @@
-package com.example.apotyk
+package com.example.apotyk.camera
 
 import android.annotation.SuppressLint
 import android.hardware.Camera
@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageButton
+import com.example.apotyk.R
 import java.lang.Exception
 
 class Camera : AppCompatActivity() {
@@ -27,7 +28,7 @@ class Camera : AppCompatActivity() {
             val camera_view = findViewById<View>(R.id.FLCamera) as FrameLayout
             camera_view.addView(mCameraView)
         }
-        @SuppressLint("MissingInflatedId", "LocalSurpress") val imageClose =
+        val imageClose =
             findViewById<View>(R.id.imgClose) as ImageButton
         imageClose.setOnClickListener{ view : View? -> System.exit(0)}
     }

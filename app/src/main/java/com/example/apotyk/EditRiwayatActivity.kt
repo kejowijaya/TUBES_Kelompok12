@@ -19,7 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Runnable
 import kotlinx.coroutines.launch
 
-class EditActivity : AppCompatActivity() {
+class EditRiwayatActivity : AppCompatActivity() {
     private var CHANNEL_ID_2 = "channel_notification_2"
     private val notificationId2 = 102
     val db by lazy { ObatDB(this) }

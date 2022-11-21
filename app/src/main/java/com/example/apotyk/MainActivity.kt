@@ -1,31 +1,42 @@
 package com.example.apotyk
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.content.SharedPreferences
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.android.volley.AuthFailureError
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.example.apotyk.api.UserApi
 import com.example.apotyk.databinding.ActivityMainBinding
-import com.example.apotyk.user.User
-import com.example.apotyk.user.UserDB
+import com.example.apotyk.model.Obat
+import com.example.apotyk.model.User
 import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.Gson
 import kotlinx.coroutines.*
+import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    lateinit var  mBundle: Bundle
-    val db by lazy { UserDB(this) }
-    lateinit var users: List<User>
+    private var queue: RequestQueue? = null
+    private val loginPreference = "login"
+    var sharedPreferencesLogin: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        queue = Volley.newRequestQueue(this)
 
         setTitle("User Login")
-
         val inputUsername = binding.inputLayoutUsername
         val inputPassword= binding.inputLayoutPassword
 
@@ -50,24 +61,45 @@ class MainActivity : AppCompatActivity() {
         })
     }
     fun checkLogin(username:String,password:String){
-        CoroutineScope(Dispatchers.IO).launch {
-            users = db.userDao().getUsers()
-            users.forEach{
-                if(it.username==username&&it.password==password){
-                    val moveHome=Intent(this@MainActivity,HomeActivity::class.java)
-                    mBundle = Bundle()
-                    mBundle.putInt("id",it.id)
-                    mBundle.putString("username",it.username)
-                    mBundle.putString("password",it.password)
-                    mBundle.putString("tanggalLahir",it.tanggalLahir)
-                    mBundle.putString("email",it.email)
-                    mBundle.putString("nomorTelepon",it.nomorTelepon)
-                    moveHome.putExtra("login", mBundle)
-                    startActivity(moveHome)
+        sharedPreferencesLogin = getSharedPreferences(loginPreference, Context.MODE_PRIVATE)
+        val editorLogin: SharedPreferences.Editor = sharedPreferencesLogin!!.edit()
+
+        val stringRequest: StringRequest = object : StringRequest(
+            Method.GET, UserApi.GET_ALL_URL, Response.Listener { response ->
+                val gson = Gson()
+                val json = JSONObject(response)
+                var user : Array<User> = gson.fromJson(
+                    json.getJSONArray("data").toString(),
+                    Array<User>::class.java)
+                var isLogin = false
+                for (i in user.indices) {
+                    if (user[i].username == username && user[i].password == password) {
+                        editorLogin.putLong("idUser", user[i].id!!)
+                        editorLogin.commit()
+                        isLogin = true
+                        val intent = Intent(this, HomeActivity::class.java)
+                        intent.putExtra("id", user[i].id)
+                        startActivity(intent)
+                        break
+                    }
                 }
+                if (!isLogin) {
+                    Toast.makeText(this, "Username or Password is incorrect", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            },
+            Response.ErrorListener { error ->
+                Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["username"] = username
+                params["password"] = password
+                return params
             }
         }
+        queue?.add(stringRequest)
     }
-
 
 }

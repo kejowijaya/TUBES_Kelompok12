@@ -1,4 +1,4 @@
-package com.example.apotyk
+package com.example.apotyk.camera
 
 import android.content.Context
 import android.hardware.Camera
