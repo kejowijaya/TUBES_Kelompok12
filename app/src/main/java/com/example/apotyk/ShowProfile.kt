@@ -58,18 +58,22 @@ class ShowProfile : AppCompatActivity() {
                     startActivity(moveHome)
                     return@setOnNavigationItemReselectedListener
                 }
+
                 R.id.menu_riwayat -> {
                     val moveRiwayat = Intent(this,ShowRiwayat::class.java)
                     startActivity(moveRiwayat)
                     return@setOnNavigationItemReselectedListener
                 }
+
                 R.id.menu_user -> {
 
                 }
+
                 R.id.menu_exit -> {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }
+
                 R.id.menu_map -> {
                     val moveMap = Intent(this, MapActivity::class.java)
                     startActivity(moveMap)

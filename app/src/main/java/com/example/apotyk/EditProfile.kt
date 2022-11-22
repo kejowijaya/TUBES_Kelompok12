@@ -77,7 +77,8 @@ class EditProfile : AppCompatActivity() {
                     } catch (e: Exception) {
                         Toast.makeText(this@EditProfile, e.message, Toast.LENGTH_SHORT).show()
                     }
-                }) {
+                })
+                    {
                 @Throws(AuthFailureError::class)
                 override fun getHeaders(): Map<String, String> {
                     val headers = HashMap<String, String>()
@@ -100,7 +101,6 @@ class EditProfile : AppCompatActivity() {
             val intent = Intent(this, ShowProfile::class.java)
             startActivity(intent)
         }
-
     }
 
     private fun getUserById(id: Long) {
@@ -120,7 +120,6 @@ class EditProfile : AppCompatActivity() {
 
 
                 Toast.makeText(this@EditProfile,"Data berhasil diambil", Toast.LENGTH_SHORT).show()
-
             },
                 Response.ErrorListener{ error ->
                     try{

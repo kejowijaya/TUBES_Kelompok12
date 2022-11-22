@@ -25,7 +25,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService(){
         }
 
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
-
         val channelId = "CHANNEL"
 
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
