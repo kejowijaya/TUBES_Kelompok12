@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley
 import com.example.apotyk.api.ObatApi
 import com.example.apotyk.model.Obat
 import com.google.gson.Gson
+import es.dmoral.toasty.Toasty
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 
@@ -83,7 +84,7 @@ class AddEditObatActivity : AppCompatActivity() {
                 var obat = gson.fromJson(response, Obat::class.java)
 
                 if (obat != null)
-                    Toast.makeText(this@AddEditObatActivity, "Data Berhasil Ditambahkan", Toast.LENGTH_SHORT).show()
+                    Toasty.success(this@AddEditObatActivity, "Data Berhasil Ditambahkan", Toast.LENGTH_SHORT, true).show()
 
                 val returnIntent = Intent()
                 setResult(RESULT_OK, returnIntent)
@@ -95,13 +96,13 @@ class AddEditObatActivity : AppCompatActivity() {
                 try {
                     val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
                     val errors = JSONObject(responseBody)
-                    Toast.makeText(
+                    Toasty.error(
                         this@AddEditObatActivity,
                         errors.getString("message"),
-                        Toast.LENGTH_SHORT
+                        Toast.LENGTH_SHORT, true
                     ).show()
                 } catch (e: Exception) {
-                    Toast.makeText(this@AddEditObatActivity, e.message, Toast.LENGTH_SHORT).show()
+                    Toasty.error(this@AddEditObatActivity, e.message.toString(), Toast.LENGTH_SHORT, true).show()
                 }
             }) {
                 @Throws(AuthFailureError::class)
@@ -138,7 +139,7 @@ class AddEditObatActivity : AppCompatActivity() {
                 var obat = gson.fromJson(response, Obat::class.java)
 
                 if(obat != null)
-                    Toast.makeText(this@AddEditObatActivity, "Data berhasil diupdate", Toast.LENGTH_SHORT).show()
+                    Toasty.success(this@AddEditObatActivity, "Data berhasil diupdate", Toast.LENGTH_SHORT, true).show()
 
                 val returnIntent = Intent()
                 setResult(RESULT_OK, returnIntent)
@@ -150,13 +151,13 @@ class AddEditObatActivity : AppCompatActivity() {
                 try {
                     val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
                     val errors = JSONObject(responseBody)
-                    Toast.makeText(
+                    Toasty.error(
                         this@AddEditObatActivity,
                         errors.getString("message"),
-                        Toast.LENGTH_SHORT
+                        Toast.LENGTH_SHORT, true
                     ).show()
                 } catch (e: Exception) {
-                    Toast.makeText(this@AddEditObatActivity, e.message, Toast.LENGTH_SHORT).show()
+                    Toasty.error(this@AddEditObatActivity, e.message.toString(), Toast.LENGTH_SHORT).show()
                 }
             }) {
             @Throws(AuthFailureError::class)
@@ -201,7 +202,7 @@ class AddEditObatActivity : AppCompatActivity() {
                 etHarga!!.setText(obat.harga)
 
                 setExposedDropdownMenu()
-                Toast.makeText(this@AddEditObatActivity,"Data berhasil diambil", Toast.LENGTH_SHORT).show()
+                Toasty.success(this@AddEditObatActivity,"Data berhasil diambil", Toast.LENGTH_SHORT, true).show()
                 setLoading(false)
             },
                 Response.ErrorListener{ error ->
@@ -209,13 +210,13 @@ class AddEditObatActivity : AppCompatActivity() {
                     try{
                         val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
                         val errors = JSONObject(responseBody)
-                        Toast.makeText(
+                        Toasty.error(
                             this,
                             errors.getString("message"),
-                            Toast.LENGTH_SHORT
+                            Toast.LENGTH_SHORT, true
                         ).show()
                     } catch (e: Exception){
-                        Toast.makeText(this@AddEditObatActivity, e.message, Toast.LENGTH_SHORT).show()
+                        Toasty.error(this@AddEditObatActivity, e.message.toString(), Toast.LENGTH_SHORT, true).show()
                     }
                 }) {
             @Throws(AuthFailureError::class)

@@ -31,6 +31,7 @@ import com.example.apotyk.maps.MapActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
+import es.dmoral.toasty.Toasty
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 
@@ -182,9 +183,9 @@ class HomeActivity : AppCompatActivity() {
                 srObat!!.isRefreshing = false
 
                 if(!obat.isEmpty())
-                    Toast.makeText(this@HomeActivity, "Data berhasil diambil", Toast.LENGTH_SHORT).show()
+                    Toasty.success(this@HomeActivity, "Data berhasil diambil", Toast.LENGTH_SHORT, true).show()
                 else
-                    Toast.makeText(this@HomeActivity, "Data Kosong!", Toast.LENGTH_SHORT).show()
+                    Toasty.warning(this@HomeActivity, "Data Kosong!", Toast.LENGTH_SHORT, true).show()
 
             }, Response.ErrorListener { error ->
                 srObat!!.isRefreshing = false
@@ -192,7 +193,7 @@ class HomeActivity : AppCompatActivity() {
                     val responseBody =
                         String(error.networkResponse.data, StandardCharsets.UTF_8)
                     val errors = JSONObject(responseBody)
-                    Toast.makeText(this@HomeActivity, errors.getString("message"), Toast.LENGTH_SHORT).show()
+                    Toasty.error(this@HomeActivity, errors.getString("message"), Toast.LENGTH_SHORT, true).show()
                 } catch (e: Exception){
                     Toast.makeText(this@HomeActivity, e.message, Toast.LENGTH_SHORT).show()
                 }
@@ -217,7 +218,7 @@ class HomeActivity : AppCompatActivity() {
                 val gson = Gson()
                 var obat = gson.fromJson(response, Obat::class.java)
                 if(obat != null)
-                    Toast.makeText(this@HomeActivity, "Data Berhasil Dihapus", Toast.LENGTH_SHORT).show()
+                    Toasty.success(this@HomeActivity, "Data Berhasil Dihapus", Toast.LENGTH_SHORT, true).show()
 
                 allObat()
             }, Response.ErrorListener { error ->
@@ -225,7 +226,7 @@ class HomeActivity : AppCompatActivity() {
                 try {
                     val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
                     val errors = JSONObject(responseBody)
-                    Toast.makeText(this@HomeActivity, errors.getString("message"), Toast.LENGTH_SHORT).show()
+                    Toasty.error(this@HomeActivity, errors.getString("message"), Toast.LENGTH_SHORT, true).show()
                 } catch (e: java.lang.Exception){
                     Toast.makeText(this@HomeActivity, e.message, Toast.LENGTH_SHORT).show()
                 }
