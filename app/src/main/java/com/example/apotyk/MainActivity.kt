@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
 import android.content.SharedPreferences
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -20,6 +21,7 @@ import com.example.apotyk.model.Obat
 import com.example.apotyk.model.User
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
+import com.master.permissionhelper.PermissionHelper
 import kotlinx.coroutines.*
 import org.json.JSONObject
 
@@ -40,6 +42,26 @@ class MainActivity : AppCompatActivity() {
         val inputUsername = binding.inputLayoutUsername
         val inputPassword= binding.inputLayoutPassword
 
+        val permissionHelper = PermissionHelper(
+            this,
+            arrayOf(
+                android.Manifest.permission.CAMERA,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.Manifest.permission.INTERNET,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                android.Manifest.permission.MANAGE_EXTERNAL_STORAGE)
+            , 100)
+        permissionHelper?.denied {
+            Log.d("TAG", "Permission denied")
+        }
+        //Request all permission
+        permissionHelper?.requestAll {
+            Log.d("TAG", "All permission granted")
+        }
+        //Request individual permission
+        permissionHelper?.requestIndividual {
+            Log.d("TAG", "Individual Permission Granted")
+        }
 
         binding.btnMainRegister.setOnClickListener{
             val intent = Intent(this,Register::class.java)

@@ -24,6 +24,8 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.anggrayudi.storage.SimpleStorageHelper
+import com.anggrayudi.storage.file.getAbsolutePath
 import com.example.apotyk.api.UserApi
 import com.example.apotyk.databinding.ActivityMainBinding
 import com.example.apotyk.databinding.ActivityRegisterBinding
@@ -65,6 +67,7 @@ class Register : AppCompatActivity() {
     private var CHANNEL_ID_1 = "channel_notification_1"
     private val notificationId2 = 101
     private var queue: RequestQueue? = null
+    private val storageHelper = SimpleStorageHelper(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,12 +108,22 @@ class Register : AppCompatActivity() {
             }
 
             if(check) {
-                createUser()
-                createPdf(username, password, email, noTelp, tglLahir)
+                storageHelper.openFolderPicker(2)
             }
 
         }
 
+        storageHelper.onFolderSelected = { requestCode, folder ->
+            createUser()
+            createPdf(
+                binding.etUsername.text.toString(),
+                binding.etPassword.text.toString(),
+                binding.etEmail.text.toString(),
+                binding.etNomorTelepon.text.toString(),
+                binding.etTanggalLahir.text.toString(),
+                folder.getAbsolutePath(this)
+            )
+        }
     }
 
     private fun createNotificationChannel(){
@@ -214,9 +227,9 @@ class Register : AppCompatActivity() {
     @Throws(
         FileNotFoundException::class
     )
-    private fun createPdf(username: String, password: String, email: String, noTelp: String, tglLahir: String) {
-        val pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()
-        val file = File(pdfPath, "Data_Register_APOTYK.pdf")
+    private fun createPdf(username: String, password: String, email: String, noTelp: String, tglLahir: String, uri: String) {
+
+        val file = File(uri, "Data_Register_APOTYK.pdf")
         FileOutputStream(file)
 
         val writer = PdfWriter(file)
