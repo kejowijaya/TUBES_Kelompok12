@@ -229,7 +229,7 @@ class Register : AppCompatActivity() {
     )
     private fun createPdf(username: String, password: String, email: String, noTelp: String, tglLahir: String, uri: String) {
 
-        val file = File(uri, "Data_Register_APOTYK.pdf")
+        val file = File(uri, "Data_Register_APOTYK_" + username +".pdf")
         FileOutputStream(file)
 
         val writer = PdfWriter(file)
