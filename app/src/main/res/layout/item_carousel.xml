@@ -10,6 +10,7 @@
         android:layout_height="240dp"
         android:text="obat"
         android:textSize="60sp"
+        android:textColor="@color/white"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
