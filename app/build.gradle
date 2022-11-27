@@ -75,4 +75,7 @@ dependencies {
 
     //Permission Library
     implementation 'com.github.pankaj89:PermissionHelper:2.3'
+
+    //Carousel Library
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 }

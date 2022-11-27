@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.viewpager2.widget.ViewPager2
 import com.android.volley.AuthFailureError
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -46,7 +47,7 @@ class HomeActivity : AppCompatActivity() {
     private var adapter: RVObatAdapter? = null
     private var svObat: SearchView? = null
     private var layoutLoading: LinearLayout? = null
-
+    private var viewPager: View? = null
 
     companion object{
         const val LAUNCH_ADD_ACTIVITY = 123
@@ -60,8 +61,13 @@ class HomeActivity : AppCompatActivity() {
         layoutLoading = findViewById(R.id.layout_loading)
         srObat = findViewById(R.id.sr_obat)
         svObat = findViewById(R.id.sv_obat)
+        viewPager = findViewById<ViewPager2>(R.id.view_pager)
+        carouselSetup()
 
-        srObat?.setOnRefreshListener (SwipeRefreshLayout.OnRefreshListener { allObat() })
+        srObat?.setOnRefreshListener (SwipeRefreshLayout.OnRefreshListener {
+            allObat()
+            carouselSetup()
+        })
         svObat?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return false
@@ -167,6 +173,46 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    fun carouselSetup() {
+        val stringRequest : StringRequest = object:
+            StringRequest(Method.GET, ObatApi.GET_ALL_URL, Response.Listener { response ->
+                val gson = Gson()
+                val json = JSONObject(response)
+                var obat : Array<Obat> = gson.fromJson(
+                    json.getJSONArray("data").toString(),
+                    Array<Obat>::class.java
+                )
+                var namaObat = ArrayList<String>()
+                for (i in obat.indices) {
+                    if(i==3) break
+                    else {
+                        namaObat.add(obat[i].nama)
+                    }
+                }
+                (viewPager as ViewPager2?)!!.setAdapter(CarouselRVAdapter(namaObat))
+
+            }, Response.ErrorListener { error ->
+                srObat!!.isRefreshing = false
+                try {
+                    val responseBody =
+                        String(error.networkResponse.data, StandardCharsets.UTF_8)
+                    val errors = JSONObject(responseBody)
+                    Toasty.error(this@HomeActivity, errors.getString("message"), Toast.LENGTH_SHORT, true).show()
+                } catch (e: Exception){
+                    Toast.makeText(this@HomeActivity, e.message, Toast.LENGTH_SHORT).show()
+                }
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Accept"] = "application/json"
+                return headers
+            }
+
+        }
+        queue!!.add(stringRequest)
+    }
+
     private fun allObat(){
         srObat!!.isRefreshing = true
         val stringRequest : StringRequest = object:
@@ -221,6 +267,7 @@ class HomeActivity : AppCompatActivity() {
                     Toasty.success(this@HomeActivity, "Data Berhasil Dihapus", Toast.LENGTH_SHORT, true).show()
 
                 allObat()
+                carouselSetup()
             }, Response.ErrorListener { error ->
                 setLoading(false)
                 try {
