@@ -106,8 +106,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 if (!isLogin) {
-                    Toast.makeText(this, "Username or Password is incorrect", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(this, "Username or Password is incorrect", Toast.LENGTH_SHORT).show()
                 }
             },
             Response.ErrorListener { error ->

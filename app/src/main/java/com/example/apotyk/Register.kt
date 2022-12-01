@@ -14,6 +14,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.util.Patterns
 import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -47,6 +48,7 @@ import com.itextpdf.layout.element.Table
 import com.itextpdf.layout.property.HorizontalAlignment
 import com.itextpdf.layout.property.TextAlignment
 import es.dmoral.toasty.Toasty
+import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.activity_register.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -78,8 +80,6 @@ class Register : AppCompatActivity() {
         createNotificationChannel()
 
         binding.btnRegister.setOnClickListener{
-            var check = true
-
             val username = binding.etUsername.text.toString()
             val password = binding.etPassword.text.toString()
             val email = binding.etEmail.text.toString()
@@ -87,27 +87,23 @@ class Register : AppCompatActivity() {
             val tglLahir = binding.etTanggalLahir.text.toString()
 
             if(username.isEmpty() == true) {
-                binding.etUsername.error = "Please enter username"
-                check = false
+                Toast.makeText(this@Register, "Please enter username", Toast.LENGTH_SHORT).show()
             }
-            if(password.isEmpty() == true) {
-                binding.etPassword.error = "Please enter password"
-                check = false
+            else if(password.isEmpty() == true) {
+                Toast.makeText(this@Register, "Please enter password", Toast.LENGTH_SHORT).show()
             }
-            if(email.isEmpty() == true) {
-                binding.etEmail.error = "Please enter email"
-                check = false
-            }
-            if(noTelp.isEmpty() == true) {
-                binding.etNomorTelepon.error = "Please enter nomor telepon"
-                check = false
-            }
-            if(tglLahir.isEmpty() == true) {
-                binding.etTanggalLahir.error = "Please enter tanggal lahir"
-                check = false
-            }
+            else if(email.isEmpty() == true) {
+                Toast.makeText(this@Register, "Please enter email", Toast.LENGTH_SHORT).show()
 
-            if(check) {
+            }else if(Patterns.EMAIL_ADDRESS.matcher(email).matches() == false){
+                Toast.makeText(this@Register, "Please enter email using email format", Toast.LENGTH_SHORT).show()
+            }
+            else if(tglLahir.isEmpty() == true) {
+                Toast.makeText(this@Register, "Please enter tanggal lahir", Toast.LENGTH_SHORT).show()
+            }
+            else if(noTelp.isEmpty() == true) {
+                Toast.makeText(this@Register, "Please enter nomor telepon", Toast.LENGTH_SHORT).show()
+            } else {
                 storageHelper.openFolderPicker(2)
             }
 
@@ -167,59 +163,60 @@ class Register : AppCompatActivity() {
 
     private fun createUser() {
 
-        val user = User(
-            binding.etUsername.text.toString(),
-            binding.etPassword.text.toString(),
-            binding.etEmail.text.toString(),
-            binding.etTanggalLahir.text.toString(),
-            binding.etNomorTelepon.text.toString()
-        )
+            val user = User(
+                binding.etUsername.text.toString(),
+                binding.etPassword.text.toString(),
+                binding.etEmail.text.toString(),
+                binding.etTanggalLahir.text.toString(),
+                binding.etNomorTelepon.text.toString()
+            )
 
-        val stringRequest: StringRequest =
-            object : StringRequest(Method.POST, UserApi.ADD_URL, Response.Listener { response ->
-                val gson = Gson()
-                var user = gson.fromJson(response, User::class.java)
+            val stringRequest: StringRequest =
+                object : StringRequest(Method.POST, UserApi.ADD_URL, Response.Listener { response ->
+                    val gson = Gson()
+                    var user = gson.fromJson(response, User::class.java)
 
-                if (user != null)
-                    Toasty.success(this@Register, "Register Berhasil !", Toast.LENGTH_SHORT, true).show()
+                    if (user != null)
+                        Toasty.success(this@Register, "Register Berhasil !", Toast.LENGTH_SHORT, true).show()
 
-                val returnIntent = Intent()
-                setResult(RESULT_OK, returnIntent)
-                finish()
+                    val returnIntent = Intent()
+                    setResult(RESULT_OK, returnIntent)
+                    finish()
 
-                sendNotifiaction2()
-            }, Response.ErrorListener { error ->
-                try {
-                    val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
-                    val errors = JSONObject(responseBody)
-                    Toasty.error(
-                        this@Register,
-                        errors.getString("message"),
-                        Toast.LENGTH_SHORT, true
-                    ).show()
-                } catch (e: Exception) {
-                    Toast.makeText(this@Register, e.message, Toast.LENGTH_SHORT).show()
+                    sendNotifiaction2()
+                }, Response.ErrorListener { error ->
+                    try {
+                        val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                        val errors = JSONObject(responseBody)
+                        Toasty.error(
+                            this@Register,
+                            errors.getString("message"),
+                            Toast.LENGTH_SHORT, true
+                        ).show()
+                    } catch (e: Exception) {
+                        Toast.makeText(this@Register, e.message, Toast.LENGTH_SHORT).show()
+                    }
+                }) {
+                    @Throws(AuthFailureError::class)
+                    override fun getHeaders(): Map<String, String> {
+                        val headers = HashMap<String, String>()
+                        headers["Accept"] = "application/json"
+                        return headers
+                    }
+
+                    override fun getParams(): MutableMap<String, String>? {
+                        val params = HashMap<String, String>()
+                        params["username"] = user.username
+                        params["password"] = user.password
+                        params["email"] = user.email
+                        params["tanggal_lahir"] = user.tanggal_lahir
+                        params["nomor_telepon"] = user.nomor_telepon
+                        return params
+                    }
                 }
-            }) {
-                @Throws(AuthFailureError::class)
-                override fun getHeaders(): Map<String, String> {
-                    val headers = HashMap<String, String>()
-                    headers["Accept"] = "application/json"
-                    return headers
-                }
 
-                override fun getParams(): MutableMap<String, String>? {
-                    val params = HashMap<String, String>()
-                    params["username"] = user.username
-                    params["password"] = user.password
-                    params["email"] = user.email
-                    params["tanggal_lahir"] = user.tanggal_lahir
-                    params["nomor_telepon"] = user.nomor_telepon
-                    return params
-                }
-            }
+            queue!!.add(stringRequest)
 
-        queue!!.add(stringRequest)
     }
 
     @SuppressLint("ObsoleteSdkInt")
@@ -229,7 +226,7 @@ class Register : AppCompatActivity() {
     )
     private fun createPdf(username: String, password: String, email: String, noTelp: String, tglLahir: String, uri: String) {
 
-        val file = File(uri, "Data_Register_APOTYK_" + username +".pdf")
+        val file = File(uri, "Data_Register_APOTYK.pdf")
         FileOutputStream(file)
 
         val writer = PdfWriter(file)
