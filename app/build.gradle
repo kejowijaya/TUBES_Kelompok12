@@ -64,17 +64,17 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.google.code.gson:gson:2.8.8'
 
+    //Permission Library
+    implementation 'com.github.pankaj89:PermissionHelper:2.3'
+
+    //Storage Library
+    implementation "com.anggrayudi:storage:1.5.0"
+
     //PDF Library
     implementation 'com.itextpdf:itext7-core:7.1.13'
 
     //Toast Library
     implementation 'com.github.GrenderG:Toasty:1.5.2'
-
-    //Storage Library
-    implementation "com.anggrayudi:storage:1.5.0"
-
-    //Permission Library
-    implementation 'com.github.pankaj89:PermissionHelper:2.3'
 
     //Carousel Library
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
