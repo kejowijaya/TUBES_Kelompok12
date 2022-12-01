@@ -4,7 +4,6 @@ package com.example.apotyk
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions.*
@@ -13,7 +12,6 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import androidx.test.rule.GrantPermissionRule
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
@@ -64,7 +62,7 @@ class MainActivityTest {
                 isDisplayed()
             )
         )
-        textInputEditText.perform(replaceText("kevin"), closeSoftKeyboard())
+        textInputEditText.perform(replaceText("1"), closeSoftKeyboard())
 
 
         val materialButton2 = onView(
@@ -86,7 +84,7 @@ class MainActivityTest {
         materialButton2.perform(click())
         onView(isRoot()).perform(waitFor(3000))
 
-        val textInputEditText4 = onView(
+        val textInputEditText2 = onView(
             allOf(
                 childAtPosition(
                     childAtPosition(
@@ -98,8 +96,7 @@ class MainActivityTest {
                 isDisplayed()
             )
         )
-        textInputEditText4.perform(replaceText("1"), closeSoftKeyboard())
-
+        textInputEditText2.perform(replaceText("123"), closeSoftKeyboard())
 
         val materialButton3 = onView(
             allOf(
@@ -120,21 +117,50 @@ class MainActivityTest {
         materialButton3.perform(click())
         onView(isRoot()).perform(waitFor(3000))
 
-
-        val textInputEditText7 = onView(
+        val textInputEditText3 = onView(
             allOf(
-                withText("1"),
+                withText("123"),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.inputLayoutPassword),
-                        1
+                        0
                     ),
                     0
                 ),
                 isDisplayed()
             )
         )
-        textInputEditText7.perform(replaceText("123"), closeSoftKeyboard())
+        textInputEditText3.perform(click())
+
+        val textInputEditText4 = onView(
+            allOf(
+                withText("123"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.inputLayoutPassword),
+                        0
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        textInputEditText4.perform(replaceText("1"))
+
+        val textInputEditText5 = onView(
+            allOf(
+                withText("1"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.inputLayoutPassword),
+                        0
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        textInputEditText5.perform(closeSoftKeyboard())
 
 
         val materialButton4 = onView(
