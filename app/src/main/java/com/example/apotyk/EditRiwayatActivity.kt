@@ -13,6 +13,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.example.apotyk.user.Constant
 import com.example.apotyk.obat.Obat
 import com.example.apotyk.obat.ObatDB
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_edit.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -53,25 +54,41 @@ class EditRiwayatActivity : AppCompatActivity() {
     }
     private fun setupListener() {
         button_save.setOnClickListener {
-            sendNotification()
-            CoroutineScope(Dispatchers.IO).launch {
+            if(edit_title.text.toString().isEmpty()){
+                Toasty.error(this, "Harap isi nama obat")
+            }else if(edit_note.text.toString().isEmpty()){
+                Toasty.error(this, "Harap masukkan jumlah obat")
+            }else {
                 sendNotification()
-                db.obatDao().addObat(
-                    Obat(0,edit_title.text.toString(),
-                        edit_note.text.toString())
-                )
+                CoroutineScope(Dispatchers.IO).launch {
+                    sendNotification()
+                    db.obatDao().addObat(
+                        Obat(
+                            0, edit_title.text.toString(),
+                            edit_note.text.toString()
+                        )
+                    )
 
-                finish()
+                    finish()
 
+                }
             }
         }
         button_update.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                db.obatDao().updateObat(
-                    Obat(noteId, edit_title.text.toString(),
-                        edit_note.text.toString())
-                )
-                finish()
+            if (edit_title.text.toString().isEmpty()) {
+                Toasty.error(this, "Harap isi nama obat")
+            } else if (edit_note.text.toString().isEmpty()) {
+                Toasty.error(this, "Harap masukkan jumlah obat")
+            } else {
+                CoroutineScope(Dispatchers.IO).launch {
+                    db.obatDao().updateObat(
+                        Obat(
+                            noteId, edit_title.text.toString(),
+                            edit_note.text.toString()
+                        )
+                    )
+                    finish()
+                }
             }
         }
     }
