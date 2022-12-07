@@ -55,9 +55,9 @@ class EditRiwayatActivity : AppCompatActivity() {
     private fun setupListener() {
         button_save.setOnClickListener {
             if(edit_title.text.toString().isEmpty()){
-                Toasty.error(this, "Harap isi nama obat")
+                Toasty.error(this, "Harap isi nama obat").show()
             }else if(edit_note.text.toString().isEmpty()){
-                Toasty.error(this, "Harap masukkan jumlah obat")
+                Toasty.error(this, "Harap masukkan jumlah obat").show()
             }else {
                 sendNotification()
                 CoroutineScope(Dispatchers.IO).launch {
@@ -76,9 +76,9 @@ class EditRiwayatActivity : AppCompatActivity() {
         }
         button_update.setOnClickListener {
             if (edit_title.text.toString().isEmpty()) {
-                Toasty.error(this, "Harap isi nama obat")
+                Toasty.error(this, "Harap isi nama obat").show()
             } else if (edit_note.text.toString().isEmpty()) {
-                Toasty.error(this, "Harap masukkan jumlah obat")
+                Toasty.error(this, "Harap masukkan jumlah obat").show()
             } else {
                 CoroutineScope(Dispatchers.IO).launch {
                     db.obatDao().updateObat(
