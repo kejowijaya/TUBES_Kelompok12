@@ -86,27 +86,7 @@ class Register : AppCompatActivity() {
             val noTelp = binding.etNomorTelepon.text.toString()
             val tglLahir = binding.etTanggalLahir.text.toString()
 
-            if(username.isEmpty() == true) {
-                Toast.makeText(this@Register, "Please enter username", Toast.LENGTH_SHORT).show()
-            }
-            else if(password.isEmpty() == true) {
-                Toast.makeText(this@Register, "Please enter password", Toast.LENGTH_SHORT).show()
-            }
-            else if(email.isEmpty() == true) {
-                Toast.makeText(this@Register, "Please enter email", Toast.LENGTH_SHORT).show()
-
-            }else if(Patterns.EMAIL_ADDRESS.matcher(email).matches() == false){
-                Toast.makeText(this@Register, "Please enter email using email format", Toast.LENGTH_SHORT).show()
-            }
-            else if(tglLahir.isEmpty() == true) {
-                Toast.makeText(this@Register, "Please enter tanggal lahir", Toast.LENGTH_SHORT).show()
-            }
-            else if(noTelp.isEmpty() == true) {
-                Toast.makeText(this@Register, "Please enter nomor telepon", Toast.LENGTH_SHORT).show()
-            } else {
-                storageHelper.openFolderPicker(2)
-            }
-
+            storageHelper.openFolderPicker(2)
         }
 
         storageHelper.onFolderSelected = { requestCode, folder ->

@@ -22,8 +22,10 @@ import com.example.apotyk.model.User
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import com.master.permissionhelper.PermissionHelper
+import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.*
 import org.json.JSONObject
+import java.nio.charset.StandardCharsets
 
 
 class MainActivity : AppCompatActivity() {
@@ -73,13 +75,8 @@ class MainActivity : AppCompatActivity() {
             val username:String=inputUsername.getEditText()?.getText().toString()
             val password:String=inputPassword.getEditText()?.getText().toString()
 
-            if(username.isEmpty()){
-                inputUsername.setError("Username must be filled with text")
-            }else if(password.isEmpty()){
-                inputPassword.setError("Password must be filled with text")
-            }else {
-                checkLogin(username, password)
-            }
+            checkLogin(username, password)
+
         })
     }
     fun checkLogin(username:String,password:String){
@@ -87,30 +84,36 @@ class MainActivity : AppCompatActivity() {
         val editorLogin: SharedPreferences.Editor = sharedPreferencesLogin!!.edit()
 
         val stringRequest: StringRequest = object : StringRequest(
-            Method.GET, UserApi.GET_ALL_URL, Response.Listener { response ->
+            Method.POST, UserApi.LOGIN_URL, Response.Listener { response ->
                 val gson = Gson()
                 val json = JSONObject(response)
-                var user : Array<User> = gson.fromJson(
-                    json.getJSONArray("data").toString(),
-                    Array<User>::class.java)
-                var isLogin = false
-                for (i in user.indices) {
-                    if (user[i].username == username && user[i].password == password) {
-                        editorLogin.putLong("idUser", user[i].id!!)
-                        editorLogin.commit()
-                        isLogin = true
-                        val intent = Intent(this, HomeActivity::class.java)
-                        intent.putExtra("id", user[i].id)
-                        startActivity(intent)
-                        break
-                    }
-                }
-                if (!isLogin) {
-                    Toast.makeText(this, "Username or Password is incorrect", Toast.LENGTH_SHORT).show()
-                }
+                val data = json.getJSONObject("data")
+                val user = gson.fromJson(data.toString(), User::class.java)
+
+                editorLogin.apply {
+                    putInt("id", user.id!!.toInt())
+                    putString("username", user.username)
+                    putString("password", user.password)
+                }.apply()
+
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
+
             },
             Response.ErrorListener { error ->
-                Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
+                try {
+                    val responseBody =
+                        String(error.networkResponse.data, StandardCharsets.UTF_8)
+                    val errors = JSONObject(responseBody)
+                    Toasty.error(
+                        this@MainActivity,
+                        errors.getString("message"),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } catch (e: java.lang.Exception) {
+                    Toasty.error(this@MainActivity, "Username or Password is incorrect", Toast.LENGTH_SHORT, true).show();
+                }
             }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
