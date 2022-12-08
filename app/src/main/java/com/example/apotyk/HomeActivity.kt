@@ -25,6 +25,8 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.apotyk.adapter.CarouselRVAdapter
+import com.example.apotyk.adapter.RVObatAdapter
 import com.example.apotyk.model.Obat
 import com.example.apotyk.api.ObatApi
 import com.example.apotyk.databinding.ActivityMainBinding
@@ -85,6 +87,7 @@ class HomeActivity : AppCompatActivity() {
             startActivityForResult(i, LAUNCH_ADD_ACTIVITY)
         }
 
+
         val rvProduk = findViewById<RecyclerView>(R.id.rv_obat)
         adapter = RVObatAdapter(ArrayList(), this)
         rvProduk.layoutManager = LinearLayoutManager(this)
@@ -105,8 +108,8 @@ class HomeActivity : AppCompatActivity() {
 
                 }
                 R.id.menu_riwayat -> {
-                    val moveRiwayat = Intent(this,ShowRiwayat::class.java)
-                    startActivity(moveRiwayat)
+                    val moveReservasi = Intent(this,ShowReservasi::class.java)
+                    startActivity(moveReservasi)
                     return@setOnNavigationItemReselectedListener
                 }
                 R.id.menu_user -> {

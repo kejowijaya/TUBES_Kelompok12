@@ -18,6 +18,7 @@ import com.example.apotyk.databinding.ActivityShowProfileBinding
 import com.example.apotyk.maps.MapActivity
 import com.example.apotyk.model.User
 import com.google.gson.Gson
+import es.dmoral.toasty.Toasty
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 
@@ -60,7 +61,7 @@ class ShowProfile : AppCompatActivity() {
                 }
 
                 R.id.menu_riwayat -> {
-                    val moveRiwayat = Intent(this,ShowRiwayat::class.java)
+                    val moveRiwayat = Intent(this,ShowReservasi::class.java)
                     startActivity(moveRiwayat)
                     return@setOnNavigationItemReselectedListener
                 }
@@ -97,7 +98,7 @@ class ShowProfile : AppCompatActivity() {
                 binding!!.etSessionTanggalLahir.setText(user.tanggal_lahir)
                     binding!!.etSessionNomorTelepon.setText(user.nomor_telepon)
 
-                Toast.makeText(this@ShowProfile,"Data berhasil diambil", Toast.LENGTH_SHORT).show()
+                    Toasty.success(this@ShowProfile, "Data berhasil diambil", Toast.LENGTH_SHORT, true).show()
 
             },
                 Response.ErrorListener{ error ->

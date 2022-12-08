@@ -13,9 +13,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
 import android.util.Patterns
-import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
@@ -50,9 +48,6 @@ import com.itextpdf.layout.property.TextAlignment
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.activity_register.view.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.io.File
 import java.io.FileNotFoundException
@@ -86,7 +81,26 @@ class Register : AppCompatActivity() {
             val noTelp = binding.etNomorTelepon.text.toString()
             val tglLahir = binding.etTanggalLahir.text.toString()
 
-            storageHelper.openFolderPicker(2)
+            if(username.isEmpty() == true) {
+                Toasty.warning(this@Register, "Please enter username", Toast.LENGTH_SHORT).show()
+            }
+            else if(password.isEmpty() == true) {
+                Toasty.warning(this@Register, "Please enter password", Toast.LENGTH_SHORT).show()
+            }
+            else if(email.isEmpty() == true) {
+                Toasty.warning(this@Register, "Please enter email", Toast.LENGTH_SHORT).show()
+
+            }else if(Patterns.EMAIL_ADDRESS.matcher(email).matches() == false){
+                Toasty.warning(this@Register, "Please enter email using email format", Toast.LENGTH_SHORT).show()
+            }
+            else if(tglLahir.isEmpty() == true) {
+                Toasty.warning(this@Register, "Please enter tanggal lahir", Toast.LENGTH_SHORT).show()
+            }
+            else if(noTelp.isEmpty() == true) {
+                Toasty.warning(this@Register, "Please enter nomor telepon", Toast.LENGTH_SHORT).show()
+            } else {
+                storageHelper.openFolderPicker(2)
+            }
         }
 
         storageHelper.onFolderSelected = { requestCode, folder ->
@@ -205,8 +219,7 @@ class Register : AppCompatActivity() {
         FileNotFoundException::class
     )
     private fun createPdf(username: String, password: String, email: String, noTelp: String, tglLahir: String, uri: String) {
-
-        val file = File(uri, "Data_Register_APOTYK.pdf")
+        val file = File(uri, "Data_Register_APOTYK_" + username +".pdf")
         FileOutputStream(file)
 
         val writer = PdfWriter(file)

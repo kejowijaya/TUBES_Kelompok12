@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cv_obat"
+    android:id="@+id/cv_reservasi"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="2dp"
@@ -25,34 +25,45 @@
             android:padding="12dp">
 
             <TextView
-                android:id="@+id/tv_nama"
+                android:id="@+id/tv_tanggal"
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="Nama Obat"/>
+                android:text="Tanggal"/>
 
             <TextView
-                android:id="@+id/tv_harga"
+                android:id="@+id/tv_sesi"
                 style="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Harga"
+                android:text="Sesi"
                 android:textSize="15sp"/>
 
             <TextView
-                android:id="@+id/tv_jenis"
+                android:id="@+id/tv_dokter"
                 style="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Jenis"
+                android:text="Dokter"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_keterangan"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Keterangan"
                 android:textSize="15sp"/>
 
             <LinearLayout

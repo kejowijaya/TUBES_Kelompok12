@@ -1,10 +1,11 @@
-package com.example.apotyk
+package com.example.apotyk.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.apotyk.R
 
 class CarouselRVAdapter(private val carouselDataList: ArrayList<String>) :
     RecyclerView.Adapter<CarouselRVAdapter.CarouselItemViewHolder>() {

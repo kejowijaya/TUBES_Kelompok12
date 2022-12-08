@@ -15,6 +15,7 @@ import com.example.apotyk.api.UserApi
 import com.example.apotyk.databinding.ActivityEditProfileBinding
 import com.example.apotyk.model.User
 import com.google.gson.Gson
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_add_edit_obat.*
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
@@ -24,6 +25,7 @@ class EditProfile : AppCompatActivity() {
     private var queue: RequestQueue? = null
     private val loginPreference = "login"
     private var idUser:Long = 0
+    private var password: String = ""
     var sharedPreferencesLogin: SharedPreferences? = null
 
 
@@ -34,7 +36,6 @@ class EditProfile : AppCompatActivity() {
         setContentView(binding.root)
         val btnUpdate = binding.btnUpdateUser
         val username = binding.etEditUsername
-        val password = binding.etEditPassword
         val email = binding.etEditEmail
         val tanggalLahir = binding.etEditTanggalLahir
         val nomorTelepon = binding.etEditNomorTelepon
@@ -46,7 +47,7 @@ class EditProfile : AppCompatActivity() {
         btnUpdate.setOnClickListener {
             val user = User(
                     username = username.text.toString(),
-                    password = password.text.toString(),
+                    password,
                     email = email.text.toString(),
                     tanggal_lahir = tanggalLahir.text.toString(),
                     nomor_telepon = nomorTelepon.text.toString()
@@ -59,7 +60,7 @@ class EditProfile : AppCompatActivity() {
                             var user = gson.fromJson(response, User::class.java)
 
                             if(user != null)
-                                Toast.makeText(this@EditProfile, "Data berhasil diupdate", Toast.LENGTH_SHORT).show()
+                                Toasty.success(this@EditProfile, "Data berhasil diupdate", Toast.LENGTH_SHORT, true).show()
 
                     val returnIntent = Intent()
                     setResult(RESULT_OK, returnIntent)
@@ -89,7 +90,6 @@ class EditProfile : AppCompatActivity() {
                 override fun getParams(): MutableMap<String, String>? {
                     val params = HashMap<String, String>()
                     params["username"] = user.username
-                    params["password"] = user.password
                     params["email"] = user.email
                     params["tanggal_lahir"] = user.tanggal_lahir
                     params["nomor_telepon"] = user.nomor_telepon
@@ -113,7 +113,6 @@ class EditProfile : AppCompatActivity() {
                     User::class.java
                 )
                 binding!!.etEditUsername.setText(user.username)
-                binding!!.etEditPassword.setText(user.password)
                 binding!!.etEditEmail.setText(user.email)
                 binding!!.etEditTanggalLahir.setText(user.tanggal_lahir)
                 binding!!.etEditNomorTelepon.setText(user.nomor_telepon)

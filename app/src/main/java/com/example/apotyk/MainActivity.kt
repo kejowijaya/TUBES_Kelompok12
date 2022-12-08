@@ -90,13 +90,11 @@ class MainActivity : AppCompatActivity() {
                 val data = json.getJSONObject("data")
                 val user = gson.fromJson(data.toString(), User::class.java)
 
-                editorLogin.apply {
-                    putInt("id", user.id!!.toInt())
-                    putString("username", user.username)
-                    putString("password", user.password)
-                }.apply()
+                editorLogin.putLong("idUser", user.id!!)
+                editorLogin.commit()
 
                 val intent = Intent(this, HomeActivity::class.java)
+                intent.putExtra("id", user.id)
                 startActivity(intent)
                 finish()
 
