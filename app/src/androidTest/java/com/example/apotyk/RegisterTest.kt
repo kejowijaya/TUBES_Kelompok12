@@ -94,7 +94,6 @@ class RegisterTest {
         )
         textInputEditText2.perform(replaceText("2"), closeSoftKeyboard())
 
-
         val materialButton3 = onView(
             allOf(
                 withId(R.id.btnRegister), withText("Register"),

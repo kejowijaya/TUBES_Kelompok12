@@ -142,7 +142,7 @@ class Register : AppCompatActivity() {
         val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, broadcastIntent, 0)
         val builder = NotificationCompat.Builder(this, CHANNEL_ID_1)
             .setSmallIcon(R.drawable.ic_baseline_notifications_24)
-            .setContentTitle("Selamat Datang")
+            .setContentTitle("Selamat Datang Di Aplikasi APOTYK")
             .setContentText("Selamat Anda telah berhasil register")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setStyle(NotificationCompat.BigPictureStyle()

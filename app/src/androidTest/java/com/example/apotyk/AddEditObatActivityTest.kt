@@ -152,7 +152,6 @@ class AddEditObatActivityTest {
             )
         )
         materialButton4.perform(click())
-
         onView(isRoot()).perform(waitFor(3000))
     }
 
