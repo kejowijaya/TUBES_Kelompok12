@@ -84,7 +84,7 @@ class AddEditObatActivity : AppCompatActivity() {
                 var obat = gson.fromJson(response, Obat::class.java)
 
                 if (obat != null)
-                    Toasty.success(this@AddEditObatActivity, "Data Berhasil Ditambahkan", Toast.LENGTH_SHORT, true).show()
+                    Toasty.success(this@AddEditObatActivity, "Data Obat Berhasil Ditambahkan", Toast.LENGTH_SHORT, true).show()
 
                 val returnIntent = Intent()
                 setResult(RESULT_OK, returnIntent)
@@ -139,7 +139,7 @@ class AddEditObatActivity : AppCompatActivity() {
                 var obat = gson.fromJson(response, Obat::class.java)
 
                 if(obat != null)
-                    Toasty.success(this@AddEditObatActivity, "Data berhasil diupdate", Toast.LENGTH_SHORT, true).show()
+                    Toasty.success(this@AddEditObatActivity, "Data Obat berhasil diupdate", Toast.LENGTH_SHORT, true).show()
 
                 val returnIntent = Intent()
                 setResult(RESULT_OK, returnIntent)

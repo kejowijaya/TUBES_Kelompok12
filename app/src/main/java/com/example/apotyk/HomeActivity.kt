@@ -160,7 +160,7 @@ class HomeActivity : AppCompatActivity() {
         val builder = NotificationCompat.Builder(this, CHANNEL_ID_2)
             .setSmallIcon(R.drawable.ic_baseline_notifications_24)
             .setContentTitle("Terima Kasih")
-            .setContentText("Silahkan datang kembali dan sehat selalu. Anda sehat kami puas")
+            .setContentText("Silahkan datang kembali dan sehat selalu. Anda sehat kami puas :)")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setStyle(NotificationCompat.BigTextStyle()
                 .bigText("Silahkan datang kembali dan sehat selalu. Anda sehat kami puas. " +

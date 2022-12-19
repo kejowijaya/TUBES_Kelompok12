@@ -48,6 +48,7 @@ class AddEditReservasiActivityTest {
             )
         )
         materialButton.perform(click())
+
         onView(isRoot()).perform(waitFor(3000))
 
         val textInputEditText = onView(

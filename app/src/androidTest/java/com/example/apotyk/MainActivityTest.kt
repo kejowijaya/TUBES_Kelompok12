@@ -162,7 +162,6 @@ class MainActivityTest {
         )
         textInputEditText5.perform(closeSoftKeyboard())
 
-
         val materialButton4 = onView(
             allOf(
                 withId(R.id.btnLogin), withText("Login"),
