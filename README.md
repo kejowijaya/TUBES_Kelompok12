@@ -1,6 +1,8 @@
 # TUBES_Kelompok12
 
-Pembagian Tugas UGD 5 (Push Notification)
-Blasius Yonas mengerjakan nomor 1 (Notifikasi saat berhasil registrasi)
-Kevin Jonathan mengerjakan nomor 2 (Membuat notifikasi firebase) dan bonus nomor 2 (Membuat progress bar notification)
-Tian Bita mengerjakan nomor 3 (Membuat notifikasi saat exit)
+Kelompok	  : 12 (APOTYK)
+Kelas		  : PBP C
+Nama Anggota  : 
+		    1. Kevin Jonathan Wijaya / 200710550
+		    2. Tian Bita Usfinit / 200710674
+		    3. Blasius Yonas Vikariandi / 200710909
